@@ -7,6 +7,15 @@ Shell script to create docker containers
 ** root:	docker.shell project directory
 ** vol:		default volumes (/etc/ssl/certs, /usr/local/share/ca-certificates) mounted to containers
 
+## bin/shell.sh
+* execute shell on the specified container
+* the following is to run shell on container docker in docker named 'dev' and run shell again on mongo container on top of 'dev'
+```
+bin/shell.sh dev
+cd
+bin/shell.sh mongo
+```
+
 ## bin/docker.sh
 * create docker in docker container with name 'dev'
 * expose port 53 (domain), 2375 (docker)
@@ -25,6 +34,13 @@ bin/docker.sh dev
 ```
 docker pull mongo
 bin/mongo.sh mongo
+```
+
+## bin/mariadb.sh
+* create mariadb container with name 'mysql' and empty root password
+```
+docker pull mariadb
+bin/mariadb.sh mysql
 ```
 
 ## bin/dns.sh
