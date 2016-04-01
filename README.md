@@ -5,6 +5,7 @@ Shell script to create docker containers
 * define environment variables
 	* file:	full path of the executable script
 	* root:	docker.shell project directory
+	* env:	HTTP_PROXY if defined
 	* vol:	default volumes (/etc/ssl/certs, /usr/local/share/ca-certificates) mounted to containers
 
 ## bin/shell.sh
@@ -20,7 +21,6 @@ bin/shell.sh mongo
 * create docker in docker container with name 'dev'
 * expose port 53 (domain), 2375 (docker)
 * define 127.0.0.1 as nameserver in container
-* define http_proxy as proxy server in container
 * mount volume 
 	* ${root}/docker/image:/var/lib/docker
 	* ${root}:/root
@@ -41,6 +41,21 @@ bin/mongo.sh mongo
 ```
 docker pull mariadb
 bin/mariadb.sh mysql
+```
+
+## bin/nginx.sh
+* create nginx container with name 'nginx'
+* expose port 80 (http), 443 (https)
+* mount volume 
+	* ${root}/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+	* ${root}/nginx/conf/conf.d:/etc/nginx/conf.d
+	* ${root}/nginx/ssl/nginx.key:/etc/ssl/private/nginx.key
+	* ${root}/nginx/ssl/nginx.pem:/etc/ssl/certs/nginx.pem
+	* ${root}/nginx/log:/var/log/nginx
+	* ${root}/nginx/www:/var/www
+```
+docker pull nginx:alpine
+bin/nginx.sh nginx 
 ```
 
 ## bin/oauth2-proxy.sh
