@@ -51,5 +51,5 @@ file=$(readlink -f "$0")
 root=$(dirname $(dirname "$file"))
 env="$(docker_proxy)"
 vol="-v /etc/ssl/certs:/etc/ssl/certs:ro -v /usr/local/share/ca-certificates:/usr/local/share/ca-certificates:ro"
-dns="$(docker_dns)"
 domain="docker"
+dns="$(docker_dns)"

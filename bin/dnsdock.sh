@@ -8,6 +8,5 @@ image="phensley/docker-dns"
 name="${1:+--name $1}"
 port="-p 53:53/udp"
 vol="${vol} -v /var/run/docker.sock:/docker.sock"
-cmd="--domain ${domain}"
 
 docker_run
