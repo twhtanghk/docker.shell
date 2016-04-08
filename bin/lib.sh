@@ -22,7 +22,7 @@ docker_dns() {
 	for i in ${ip}; do
 		ret="${ret} --dns=$i"
 	done
-	echo ${ret}
+	echo "${ret} --dns-search=${domain}"
 }
 
 # input parameters:
@@ -52,3 +52,4 @@ root=$(dirname $(dirname "$file"))
 env="$(docker_proxy)"
 vol="-v /etc/ssl/certs:/etc/ssl/certs:ro -v /usr/local/share/ca-certificates:/usr/local/share/ca-certificates:ro"
 dns="$(docker_dns)"
+domain="docker"
