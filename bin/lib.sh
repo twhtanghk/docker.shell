@@ -7,17 +7,22 @@ docker_running() {
 	return test ${ret} = 'true'
 }
 
-# echo ip for input container $1
+# return ip for input container $1
 docker_ip() {
 	local ret=`docker inspect --format '{{ .NetworkSettings.IPAddress }}' $1 2>/dev/null`
 	echo ${ret:=''}
 }
 
-# get dns option with nameserver lookup from container dnsdock and then ns1
-# only container dnsdock started, echo "--dns=172.17.0.4"
-# both container dnsdock and ns1 started, echo "--dns=172.17.0.4 --dns=172.17.0.6" 
+# return host ip
+docker_host() {
+	/sbin/ifconfig docker0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'
+}
+
+# get dns option with nameserver lookup from dock host and then ns1
+# only container dnsdock started, echo "--dns=172.17.0.1"
+# both container dnsdock and ns1 started, echo "--dns=172.17.0.1 --dns=172.17.0.6" 
 docker_dns() {
-	local ip="$(docker_ip dnsdock) $(docker_ip ns1)"
+	local ip="$(docker_host) $(docker_ip ns1)"
 	local ret=""
 	for i in ${ip}; do
 		ret="${ret} --dns=$i"
