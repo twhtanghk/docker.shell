@@ -39,8 +39,16 @@ docker_debug() {
 	docker run ${env} ${dns} ${port} ${vol} ${name} ${image}
 }
 
+docker_proxy() {
+	local env=${env}
+	for i in all_proxy http_proxy https_proxy ftp_proxy ALL_PROXY HTTP_PROXY HTTPS_PROXY FTP_PROXY; do
+		env="${env} ${HTTP_PROXY:+-e ${i}=${HTTP_PROXY}}"
+	done
+	echo "${env}"
+}
+
 file=$(readlink -f "$0")
 root=$(dirname $(dirname "$file"))
-env="${HTTP_PROXY:+-e HTTP_PROXY=${HTTP_PROXY}}"
+env="$(docker_proxy)"
 vol="-v /etc/ssl/certs:/etc/ssl/certs:ro -v /usr/local/share/ca-certificates:/usr/local/share/ca-certificates:ro"
 dns="$(docker_dns)"
