@@ -1,3 +1,5 @@
-*
+init.lua
+init.lc
+*.bin
 
 !.gitignore

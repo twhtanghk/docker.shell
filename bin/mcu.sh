@@ -4,9 +4,9 @@ file=$(readlink -f "$0")
 . $(dirname $file)/lib.sh
 dir="${root}/mcu"
 
-image="marcelstoer/nodemcu-build"
+image="twhtanghk/docker.esp8266"
 name="${1:+--name $1}"
-vol="${vol} -v /dev/bus/usb:/dev/bus/usb -v ${dir}:/opt/nodemcu-firmware"
-env="${env} --privileged"
+vol="${vol} -v ${dir}:/root/src"
+env="${env} --device=/dev/ttyUSB0"
 
 docker_debug
