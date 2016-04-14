@@ -52,9 +52,22 @@ docker_proxy() {
 	echo "${env}"
 }
 
+docker_name() {
+	echo "${1:+-h \"$1\" --name $1}"
+}
+
+docker_timezone() {
+	local file=/etc/timezone
+	if test -e ${file}; then
+		echo "-e TZ=`cat ${file}`"
+	else
+		echo ''
+	fi
+}
+
 file=$(readlink -f "$0")
 root=$(dirname $(dirname "$file"))
-env="$(docker_proxy)"
+env="$(docker_proxy) $(docker_timezone)"
 vol="-v /etc/ssl/certs:/etc/ssl/certs:ro -v /usr/local/share/ca-certificates:/usr/local/share/ca-certificates:ro"
 domain="docker"
 dns="$(docker_dns)"
