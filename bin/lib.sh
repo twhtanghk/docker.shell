@@ -15,7 +15,7 @@ docker_ip() {
 
 # return host ip
 docker_host() {
-	/sbin/ifconfig docker0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'
+	ip addr |grep inet |grep docker0 |awk '{print $2}' | sed -e 's/\/.*$//'
 }
 
 # get dns option with nameserver lookup from dock host and then ns1
