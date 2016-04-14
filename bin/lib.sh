@@ -70,4 +70,3 @@ root=$(dirname $(dirname "$file"))
 env="$(docker_proxy) $(docker_timezone)"
 vol="-v /etc/ssl/certs:/etc/ssl/certs:ro -v /usr/local/share/ca-certificates:/usr/local/share/ca-certificates:ro"
 domain="docker"
-dns="$(docker_dns)"
