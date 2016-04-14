@@ -15,7 +15,7 @@ docker_ip() {
 
 # return host ip
 docker_host() {
-	/sbin/ifconfig docker0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'
+	ip addr |grep inet |grep docker0 |awk '{print $2}' | sed -e 's/\/.*$//'
 }
 
 # get dns option with nameserver lookup from dock host and then ns1
@@ -52,9 +52,21 @@ docker_proxy() {
 	echo "${env}"
 }
 
+docker_name() {
+	echo "${1:+-h \"$1\" --name $1}"
+}
+
+docker_timezone() {
+	local file=/etc/timezone
+	if test -e ${file}; then
+		echo "-e TZ=`cat ${file}`"
+	else
+		echo ''
+	fi
+}
+
 file=$(readlink -f "$0")
 root=$(dirname $(dirname "$file"))
-env="$(docker_proxy)"
+env="$(docker_proxy) $(docker_timezone)"
 vol="-v /etc/ssl/certs:/etc/ssl/certs:ro -v /usr/local/share/ca-certificates:/usr/local/share/ca-certificates:ro"
 domain="docker"
-dns="$(docker_dns)"
