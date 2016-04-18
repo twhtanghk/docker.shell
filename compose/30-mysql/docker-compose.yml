@@ -1,0 +1,11 @@
+version: '2'
+services:
+  mysql:
+    image: mariadb
+    container_name: mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 3306
+    volumes:
+      - ~/mysql/conf/my.cnf:/etc/mysql/my.cnf

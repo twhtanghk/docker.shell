@@ -126,7 +126,7 @@ bin/shell.sh dev
 ```
 * start container to run docker compose ui
 ```
-bin/docker-compose -f compose/compose-ui.yml
+bin/docker-compose -f compose/compose-ui.yml up
 ```
 * show ip of the development host
 ``` 
