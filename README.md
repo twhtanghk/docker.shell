@@ -39,6 +39,9 @@ bin/shell.sh mongo
 ## bin/rmAll.sh
 * remove all docker containers
 
+## bin/rmExited.sh
+* remove those docker containers already exited
+
 ## bin/docker.sh
 * create docker in docker container 'docker:dind' with name 'dev'
 * expose port 53 (domain), 2375 (docker)
@@ -111,3 +114,26 @@ bin/dnsdock.sh dnsdock
 docker pull nginx:alpine
 bin/nginx.sh nginx 
 ```
+
+## bin/docker-compose
+* start a container to act as host (development)
+```
+bin/docker.sh dev
+```
+* access the development host
+```
+bin/shell.sh dev
+```
+* start container to run docker compose ui
+```
+bin/docker-compose -f compose/compose-ui.yml
+```
+* show ip of the development host
+``` 
+bin/ip.sh dev
+```
+* visit devlopment host ip (e.g. 172.17.0.2) and port 5000 by browser
+```
+google-chrome http://172.17.0.2:5000
+```
+* update, up, or down those defined services under folder compose/**/docker-compose.yml
