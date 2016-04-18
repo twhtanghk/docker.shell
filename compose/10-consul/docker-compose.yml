@@ -12,6 +12,4 @@ services:
       - "8400:8400"
       - "8500:8500"
       - "53:53/udp"
-    volumes:
-      - ~/consul/node1:/data
     command: -server -bootstrap
