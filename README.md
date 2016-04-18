@@ -55,22 +55,6 @@ docker pull docker:dind
 bin/docker.sh dev
 ```
 
-## bin/mongo.sh
-* create mongo container with name 'mongo'
-```
-docker pull mongo
-bin/mongo.sh mongo
-```
-
-## bin/mariadb.sh
-* create mariadb container with name 'mysql' and empty root password
-* mount volume
-	* ${dir}/conf/my.cnf:/etc/mysql/my.cnf (default listen to all interface instead of localhost only)
-```
-docker pull mariadb
-bin/mariadb.sh mysql
-```
-
 ## bin/dns.sh
 * create dns container 'twhtanghk/docker.dns' with name 'ns1'
 * link container
@@ -116,24 +100,13 @@ bin/nginx.sh nginx
 ```
 
 ## bin/docker-compose
-* start a container to act as host (development)
-```
-bin/docker.sh dev
-```
-* access the development host
-```
-bin/shell.sh dev
 ```
 * start container to run docker compose ui
 ```
-bin/docker-compose -f compose/compose-ui.yml up
+bin/docker-compose -f compose/composeui/docker-compose.yml up
 ```
-* show ip of the development host
-``` 
-bin/ip.sh dev
+* visit localhost:5000 by browser
 ```
-* visit devlopment host ip (e.g. 172.17.0.2) and port 5000 by browser
-```
-google-chrome http://172.17.0.2:5000
+google-chrome http://localhost:5000
 ```
 * update, up, or down those defined services under folder compose/**/docker-compose.yml

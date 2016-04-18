@@ -1,6 +1,5 @@
 version: '2'
 services:
-
   composeui:
     image: francescou/docker-compose-ui
     container_name: composeui
@@ -9,5 +8,5 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - .:/opt/docker-compose-projects
+      - ..:/opt/docker-compose-projects
       - /var/run/docker.sock:/var/run/docker.sock

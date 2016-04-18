@@ -1,0 +1,11 @@
+version: '2'
+services:
+  dind:
+    image: docker:dind
+    container_name: dind
+    privileged: true
+    volumes:
+      - ../../docker/image:/var/lib/docker
+      - ../..:/root"
+    ports:
+      - 2375
