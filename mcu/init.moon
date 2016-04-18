@@ -1,6 +1,4 @@
 print "Ready to start soft ap"
-     
-str = wifi.ap.getmac()
 
 wifi.ap.config
 	ssid:	"TTSwitch"
@@ -13,10 +11,11 @@ wifi.ap.setip
 
 wifi.setmode wifi.SOFTAP
     
-str = nil
 collectgarbage()
     
 print "Soft AP started"
 print "Heep:(bytes)#{node.heap()}"
 print wifi.ap.getmac()
 print wifi.ap.getip()
+
+dofile "rest.lua"
