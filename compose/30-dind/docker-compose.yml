@@ -6,6 +6,6 @@ services:
     privileged: true
     volumes:
       - ../../docker/image:/var/lib/docker
-      - ../..:/root"
+      - ../..:/root
     ports:
       - 2375
