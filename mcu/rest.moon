@@ -7,5 +7,5 @@ with net.createServer net.TCP
         \send "<h1>started</h1>"
         \close()
         req = Req(data)
-        print req:toJson()
+        print cjson.encode(req)
         collectgarbage()
