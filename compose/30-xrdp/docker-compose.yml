@@ -3,5 +3,6 @@ services:
   xrdp:
     image: twhtanghk/docker.xrdp
     container_name: xrdp
+    hostname: xrdp
     ports:
-      - 3389
+      - 3389:3389
