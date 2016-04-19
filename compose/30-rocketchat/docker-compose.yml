@@ -1,14 +1,13 @@
 version: '2'
 services:
-  rocketchatDB:
-    image: mongo
-
+  db:
+    image: mongo 
+    container_name: rocketchatDB
   rocketchat:
     image: rocketchat/rocket.chat
+    container_name: rocketchat
     environment:
       - MONGO_URL=mongodb://db:27017/rocketchat
-      - ROOT_URL=http://localhost:3000
-    links:
-      - rocketchatDB:db
+      - ROOT_URL=http://rocketchat.service.consul:3000
     ports:
       - 3000
