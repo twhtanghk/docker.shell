@@ -1,12 +1,15 @@
 version: '2'
 services:
-  # docker-compose -f docker-compose.yml run --device /dev/ttyUSB0 arduino
+  # run 'xhost +' on xserver
+  # docker-compose -f docker-compose.yml run arduino
   arduino:
     image: pandrew/arduino
     container_name: arduino
     privileged: true
+    devices:
+      - /dev/ttyUSB0
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ../../arduino:/root 
     environment:
-      - DISPLAY=:10.0
+      - DISPLAY=:0.0
