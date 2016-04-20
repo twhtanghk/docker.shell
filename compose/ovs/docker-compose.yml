@@ -8,4 +8,5 @@ services:
       - SYS_MODULE
     volumes:
       - /lib/modules:/lib/modules
+      - ${COMPOSEROOT}/ovs:/root
     network_mode: host

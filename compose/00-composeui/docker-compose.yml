@@ -5,6 +5,7 @@ services:
     container_name: composeui
     environment:
       - GIT_REPO=https://github.com/francescou/docker-compose-ui.git
+      - COMPOSEROOT=/home/twhtang/git/docker.shell
     ports:
       - 5000:5000
     volumes:

@@ -2,7 +2,8 @@ version: '2'
 services:
   node1:
     image: progrium/consul
-    container_name: node1
+    container_name: consul1
+    hostname: consul1
     ports:
       - "8300:8300"
       - "8301:8301"
