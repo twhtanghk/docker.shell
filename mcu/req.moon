@@ -1,7 +1,7 @@
 str = require "str"
 
 class Req
-  new: (data) =>
+  new: (client, data) =>
     lines = str.split data
     @method, @url, @version = string.match lines[1], "(.*) (.*) HTTP/(.*)"
     @headers = {}
