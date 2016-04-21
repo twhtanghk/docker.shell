@@ -5,8 +5,6 @@ services:
     container_name: dev
     hostname: dev
     privileged: true
-    environment:
-      - HTTPS_PROXY=http://proxy1.scig.gov.hk:8080
     volumes:
       - ${COMPOSEROOT}/docker/image:/var/lib/docker
       - ${COMPOSEROOT}:/root
