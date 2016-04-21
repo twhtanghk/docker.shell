@@ -42,65 +42,8 @@ bin/shell.sh mongo
 ## bin/rmExited.sh
 * remove those docker containers already exited
 
-## bin/docker.sh
-* create docker in docker container 'docker:dind' with name 'dev'
-* expose port 53 (domain), 2375 (docker)
-* define 127.0.0.1 as nameserver in container
-* mount volume 
-	* export HTTP_PROXY=proxy.abc.com (if required)
-	* ${root}/docker/image:/var/lib/docker
-	* ${root}:/root
-```
-docker pull docker:dind
-bin/docker.sh dev
-```
-
-## bin/dns.sh
-* create dns container 'twhtanghk/docker.dns' with name 'ns1'
-* link container
-	* --link mongo:mongo
-* dns settings
-	* --dns=127.0.0.1
-* mount volume
-	* ${dir}/conf/production.coffee:/usr/src/app/config/env/production.coffee
-	* ${dir}/conf/conf.d:/usr/src/app/conf.d
-	* ${dir}/conf/conf.d/bind9:/etc/default/bind9
-	* ${dir}/log:/usr/src/app/log"
-```
-docker pull twhtanghk/docker.dns
-bin/dns.sh ns1	
-```
-
-## bin/dnsdock.sh
-* create dnsdock container 'tonistiigi/dnsdock' with name 'dnsdock' for resolving containers' name
-* dns settings
-	* cmd options "-verbose=true -nameserver=$(docker_ip ns1):53"
-* expose port
-	* -p 53:53/udp
-* mount volume
-	*/var/run/docker.sock:/var/run/docker.sock"
-```
-docker pull tonistiigi/dnsdock
-bin/dnsdock.sh dnsdock
-```
-
-## bin/nginx.sh
-* create nginx container with name 'nginx'
-* expose port 80 (http), 443 (https)
-* mount volume 
-	* ${root}/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
-	* ${root}/nginx/conf/conf.d:/etc/nginx/conf.d
-	* ${root}/nginx/ssl/nginx.key:/etc/ssl/private/nginx.key
-	* ${root}/nginx/ssl/nginx.pem:/etc/ssl/certs/nginx.pem
-	* ${root}/nginx/log:/var/log/nginx
-	* ${root}/nginx/www:/var/www
-```
-docker pull nginx:alpine
-bin/nginx.sh nginx 
-```
 
 ## bin/docker-compose
-```
 * start container to run docker compose ui
 ```
 bin/docker-compose -f compose/composeui/docker-compose.yml up
@@ -109,4 +52,4 @@ bin/docker-compose -f compose/composeui/docker-compose.yml up
 ```
 google-chrome http://localhost:5000
 ```
-* update, up, or down those defined services under folder compose/**/docker-compose.yml
+* up, or down those defined services under folder compose/**/docker-compose.yml
