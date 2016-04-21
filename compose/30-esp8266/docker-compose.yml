@@ -6,4 +6,4 @@ services:
     devices:
       - /dev/ttyUSB0
     volumes:
-      - ../../mcu:/root/src
+      - ${COMPOSEROOT}/mcu:/root/src

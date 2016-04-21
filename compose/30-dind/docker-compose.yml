@@ -1,11 +1,15 @@
 version: '2'
 services:
-  dind:
+  dev:
     image: docker:dind
-    container_name: dind
+    container_name: dev
+    hostname: dev
     privileged: true
+    environment:
+      - HTTPS_PROXY=http://proxy1.scig.gov.hk:8080
     volumes:
-      - ../../docker/image:/var/lib/docker
-      - ../..:/root
+      - ${COMPOSEROOT}/docker/image:/var/lib/docker
+      - ${COMPOSEROOT}:/root
     ports:
       - 2375
+    command: --cluster-store=consul://localhost:8500 --cluster-advertise=eth0:2375
