@@ -1,7 +1,7 @@
 print "Ready to start soft ap"
 
 wifi.ap.config
-	ssid:	"TTSwitch"
+	ssid:	"TT#{wifi.ap.getmac()\gsub(":", "")}"
 	pwd:	"12345678"
  
 wifi.ap.setip
@@ -18,4 +18,4 @@ print "Heep:(bytes)#{node.heap()}"
 print wifi.ap.getmac()
 print wifi.ap.getip()
 
-dofile "rest.lua"
+require "rest"
