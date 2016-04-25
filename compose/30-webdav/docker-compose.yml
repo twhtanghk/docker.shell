@@ -8,6 +8,6 @@ services:
       - USERNAME=user
       - PASSWORD=password
     ports:
-      - 80
+      - 80:80
     volumes:
-      - ${COMPOSEROOT}/webdav:/var/www
+      - ${COMPOSEROOT}/webdav:/var/webdav

@@ -1,9 +1,12 @@
 #!/bin/sh
 
-LOCAL=$1
-REMOTE=$2
+NAME=$1			# vlan name
+VLAN=$2
+VIF=$3			# virtual interface
+LOCAL=$4		# local ip of virtual interface
+REMOTE=$5		# remote ip of virtual interface
 
-ovs-vsctl add-br host
-ovs-vsctl add-port host vxlan0 -- set Interface vxlan0 type=vxlan options:remote_ip=${REMOTE}
-ovs-vsctl add-port host vi0 -- set Interface vi0 type=internal
-ifconfig vi0 ${LOCAL} netmask 255.255.255.0 up
+ovs-vsctl add-br ${NAME}
+ovs-vsctl add-port ${NAME} ${VLAN} -- set Interface ${VLAN} type=vxlan options:remote_ip=${REMOTE}
+ovs-vsctl add-port ${NAME} ${vif} -- set Interface ${vif} type=internal
+ifconfig ${vif} ${LOCAL} netmask 255.255.255.0 up
