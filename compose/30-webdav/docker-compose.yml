@@ -1,0 +1,13 @@
+version: '2'
+services:
+  webdav:
+    image: morrisjobke/webdav
+    container_name: webdav
+    hostname: webdav
+    environment:
+      - USERNAME=user
+      - PASSWORD=password
+    ports:
+      - 80
+    volumes:
+      - ${COMPOSEROOT}/webdav:/var/www
