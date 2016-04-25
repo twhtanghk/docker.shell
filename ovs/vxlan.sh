@@ -8,5 +8,5 @@ REMOTE=$5		# remote ip of virtual interface
 
 ovs-vsctl add-br ${NAME}
 ovs-vsctl add-port ${NAME} ${VLAN} -- set Interface ${VLAN} type=vxlan options:remote_ip=${REMOTE}
-ovs-vsctl add-port ${NAME} ${vif} -- set Interface ${vif} type=internal
-ifconfig ${vif} ${LOCAL} netmask 255.255.255.0 up
+ovs-vsctl add-port ${NAME} ${VIF} -- set Interface ${VIF} type=internal
+ifconfig ${VIF} ${LOCAL} netmask 255.255.255.0 up
