@@ -1,0 +1,11 @@
+version: '2'
+services:
+  ovs:
+    image: beli/ldap
+    container_name: ldap
+    hostname: ldap
+    volumes:
+      - ${COMPOSEROOT}/ldap/conf:/config
+      - ${COMPOSEROOT}/ldap/data:/data
+    ports:
+      - 389
