@@ -4,6 +4,9 @@ services:
     image: beli/ldap
     container_name: ldap
     hostname: ldap
+    environment:
+      - CONF_BASEDN='dc=abc,dc=com'
+      - CONF_ROOTPW=password
     volumes:
       - ${COMPOSEROOT}/ldap/conf:/config
       - ${COMPOSEROOT}/ldap/data:/data
