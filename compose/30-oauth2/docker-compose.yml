@@ -7,5 +7,5 @@ services:
     ports:
       - 8000
     volumes:
-      - ${COMPOSEDIR}/oauth2/conf/env.py:/usr/src/app/organization/env.py
-      - ${COMPOSEDIR}/oauth2/log:/usr/src/app/log
+      - ${COMPOSEROOT}/oauth2/conf/env.py:/usr/src/app/organization/env.py
+      - ${COMPOSEROOT}/oauth2/log:/usr/src/app/log

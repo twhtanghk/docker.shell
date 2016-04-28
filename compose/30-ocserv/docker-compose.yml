@@ -9,5 +9,5 @@ services:
       - 443:443
       - 443:443/udp
     volumes:
-      - ${COMPOSEDIR}/ssl/server-cert.pem:/etc/ocserv/server-cert.pem
-      - ${COMPOSEDIR}/ssl/server-key.pem/etc/ocserv/server-key.pem
+      - ${COMPOSEROOT}/ssl/server-cert.pem:/etc/ocserv/server-cert.pem
+      - ${COMPOSEROOT}/ssl/server-key.pem/etc/ocserv/server-key.pem
