@@ -5,6 +5,5 @@ services:
     container_name: floodlight
     hostname: floodlight
     ports:
-      - 6653
-      - 8080
-    network_mode: host
+      - 6653:6653
+      - 3000:8080
