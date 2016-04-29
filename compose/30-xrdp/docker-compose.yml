@@ -5,4 +5,7 @@ services:
     container_name: xrdp
     hostname: xrdp
     ports:
-      - 3389:3389
+      - 3389
+    volumes:
+      - ${COMPOSEROOT}/xrdp:/home/user
+    network_mode: host

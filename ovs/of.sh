@@ -3,6 +3,7 @@
 NAME=$1			# vlan name
 VIF=$2			# virtual interface
 LOCAL=$3		# local ip of virtual interface
+CTL=$4			# openflow controller (e.g. tcp:192.168.63.3:6653)
 
 # see https://blog.remibergsma.com/2015/03/26/connecting-two-open-vswitches-to-create-a-l2-connection/
 # e.g.
@@ -13,3 +14,4 @@ LOCAL=$3		# local ip of virtual interface
 ovs-vsctl add-br ${NAME}
 ovs-vsctl add-port ${NAME} ${VIF} -- set Interface ${VIF} type=internal
 ifconfig ${VIF} ${LOCAL} netmask 255.255.255.0 up
+ovs-vsctl set-controller ${NAME} ${CTL}

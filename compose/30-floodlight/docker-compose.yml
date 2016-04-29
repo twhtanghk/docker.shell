@@ -1,9 +1,10 @@
 version: '2'
 services:
-  ovs:
+  floodlight:
     image: pierrecdn/floodlight
     container_name: floodlight
     hostname: floodlight
     ports:
       - 6653
       - 8080
+    network_mode: host
