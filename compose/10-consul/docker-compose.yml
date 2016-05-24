@@ -1,6 +1,6 @@
 version: '2'
 services:
-  node1:
+  consul1:
     image: progrium/consul
     container_name: consul1
     hostname: consul1
@@ -14,3 +14,25 @@ services:
       - "8500:8500"
       - "53:53/udp"
     command: -server -bootstrap
+
+  registrator:
+    depends_on:
+      - consul1
+    image: gliderlabs/registrator
+    container_name: registrator
+    hostname: registrator
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    command: consul://localhost:8500
+
+  'dns-template':
+    depends_on:
+      - consul1
+    image: 'twhtanghk/dns-template'
+    container_name: 'dns-template'
+    hostname: 'dns-template'
+    ports:
+      - 1337
+    volumes:
+     - ${COMPOSEROOT}/dns-template:/usr/src/app/template
