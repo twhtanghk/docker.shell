@@ -1,0 +1,24 @@
+version: '2'
+services:
+  mysql:
+    image: mariadb
+    container_name: mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 3306
+
+  activiti:
+    depends_on: 
+      - mysql
+    image: eternnoir/activiti
+    container_name: activiti
+    hostname: activiti
+    links:
+      - mysql
+    environment:
+      - DB_NAME=activiti
+      - DB_USER=root
+      - DB_PASS=
+    ports:
+      - 8080
