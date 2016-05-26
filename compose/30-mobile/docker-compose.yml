@@ -1,0 +1,21 @@
+version: '2'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    hostname: mongo
+    ports:
+      - 27017
+    volumes:
+      - ${COMPOSEROOT}/mobile/data:/data/db
+
+  mobile:
+    depends_on:
+      - mongo
+    image: twhtanghk/mobile
+    container_name: mobile
+    hostname: mobile
+    ports:
+      - 1337
+    volumes:
+      - ${COMPOSEROOT}/mobile/conf:/usr/src/app/config/env
