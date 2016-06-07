@@ -10,7 +10,8 @@ services:
     ports:
       - 3306
     volumes:
-      - ${COMPOSEROOT}/mysql/data:/var/lib/mysql
+      - ${COMPOSEROOT}/oauth2/conf/my.cnf:/etc/mysql/my.cnf
+      - ${COMPOSEROOT}/oauth2/data:/var/lib/mysql
 
   oauth2:
     depends_on:
@@ -23,3 +24,15 @@ services:
     volumes:
       - ${COMPOSEROOT}/oauth2/conf/env.py:/usr/src/app/organization/env.py
       - ${COMPOSEROOT}/oauth2/log:/usr/src/app/log
+
+  oauth2_proxy:
+    depends_on:
+      - oauth2
+    image: skippy/oauth2_proxy
+    container_name: oauth2_proxy
+    hostname: oauth2_proxy
+    ports:
+      - 4180
+    volumes:
+      - ${COMPOSEROOT}/oauth2_proxy/conf/google.cfg:/etc/oauth2_proxy.cfg
+    command: -config=/etc/oauth2_proxy.cfg
