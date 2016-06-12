@@ -3,7 +3,7 @@ services:
   # run 'xhost +' on xserver
   # docker-compose -f docker-compose.yml run arduino
   arduino:
-    image: pandrew/arduino
+    image: pandrew/arduino:1.6.8
     container_name: arduino
     privileged: true
     devices:
