@@ -1,0 +1,25 @@
+version: '2'
+services:
+  im_mongo:
+    image: mongo
+    container_name: im_mongo
+    hostname: im_mongo
+    ports:
+      - 27017
+    volumes:
+      - ${COMPOSEROOT}/im/data:/data/db
+    command: mongod --directoryperdb
+
+  imsails:
+    depends_on:
+      - im_mongo
+    image: twhtanghk/imsails
+    container_name: imsails
+    hostname: imsails
+    ports:
+      - 1337
+    volumes:
+      - ${COMPOSEROOT}/im/conf/server.coffee:/usr/src/app/config/env/production.coffee
+      - ${COMPOSEROOT}/im/conf/client.coffee:/usr/src/app/www/js/config/production.coffee
+      - /etc/ssl/certs:/etc/ssl/certs
+      - /usr/local/share/ca-certificates:/usr/local/share/ca-certificates

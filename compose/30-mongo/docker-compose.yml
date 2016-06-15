@@ -1,7 +1,10 @@
 version: '2'
 services:
-  mysql:
+  mongo:
     image: mongo
     container_name: mongo
+    hostname: mongo
     ports:
       - 27017
+    volumes:
+      - ${COMPOSEROOT}/mongo/data:/data/db
