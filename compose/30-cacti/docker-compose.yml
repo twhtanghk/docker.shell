@@ -1,0 +1,25 @@
+version: '2'
+services:
+  cacti_mysql:
+    image: million12/mariadb
+    container_name: cacti_mysql
+    hostname: cacti_mysql
+    ports:
+      - 3306
+    volumes:
+      - ${COMPOSEROOT}/cacti/data:/var/lib/mysql
+    env_file: .env
+
+  cacti:
+    depends_on: 
+      - cacti_mysql
+    image: polinux/cacti
+    container_name: cacti
+    hostname: cacti
+    links:
+      - cacti_mysql
+    ports:
+      - 80
+    volumes:
+      - ${COMPOSEROOT}/cacti/conf/bootstrap.sh:/config/bootstrap.sh
+    env_file: .env
