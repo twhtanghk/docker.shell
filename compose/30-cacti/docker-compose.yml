@@ -22,5 +22,5 @@ services:
       - 80
     volumes:
       - ${COMPOSEROOT}/cacti/conf/bootstrap.sh:/config/bootstrap.sh
-      - ${COMPOSEROOT}/cacti/rra:/data/www/cacti/rra
+      - ${COMPOSEROOT}/cacti/web:/data
     env_file: .env
