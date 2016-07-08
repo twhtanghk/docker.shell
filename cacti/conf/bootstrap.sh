@@ -20,6 +20,18 @@ if [ "$(ls /config/init/)" ]; then
   done
 fi
 
+ln -s /opt/remi/php70/root/usr/bin/php /usr/bin
+
+cat <<EOF >/data/www/cacti/include/config.php
+<?php
+\$database_type = "mysql";
+\$database_default = "cacti";
+\$database_hostname = "cacti_mysql";
+\$database_username = "user";
+\$database_password = "pass";
+\$database_port = "3306";
+\$database_ssl = false;
+EOF
 
 # We have TTY, so probably an interactive container...
 if test -t 0; then
