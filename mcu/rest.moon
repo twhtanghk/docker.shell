@@ -1,8 +1,10 @@
 Req = require "req"
 Res = require "res"
 Switch = require "sw"
-log = { debug: print }
+Thermistor = require "thermistor"
+log = require "log"
 
+temp = Thermistor()
 sw = {Switch(1), Switch(2)}
 
 index = (url) ->
@@ -17,33 +19,44 @@ with net.createServer net.TCP
       req = Req client, data
       res = Res client
       route = "#{req.method} #{req.url}"      
-      log.debug route
+      verbose = (msg) ->
+        log.info "#{route}: #{msg}"
 
       switch true
 
-        when route\find("GET /all") != nil
+        when route\find("GET /temp") != nil
+          res\send "#{string.format "%02.2f", temp\c()} C"
+          verbose 'get temperature'
+
+        when route\find("PUT /sw/%d+/toggle") != nil
+          i = index req.url
+          sw[i]\toggle()          
+          res\send()
+          verbose "toggle sw #{i}"
+
+        when route\find("PUT /sw/%d+/on") != nil
+          i = index req.url
+          sw[i]\on()          
+          res\send()
+
+        when route\find("PUT /sw/%d+/off") != nil
+          i = index req.url
+          sw[i]\off()          
+          res\send()
+          verbose "off sw #{i}"
+
+        when route\find("GET /sw/%d+") != nil
+          i = index req.url
+          res\send sw[i]\state()
+          verbose "get state of sw #{i}"
+
+        when route\find("GET /sw") != nil
           res\send {sw[1]\state(), sw[2]\state()}
-
-        when route\find("GET /%d+") != nil
-          res\send sw[index req.url]\state()
-
-        when route\find("PUT /%d+/toggle") != nil
-          sw[index req.url]\toggle()          
-          res\send()
-
-        when route\find("PUT /%d+/on") != nil
-          sw[index req.url]\on()          
-          res\send()
-
-        when route\find("PUT /%d+/off") != nil
-          sw[index req.url]\off()          
-          res\send()
-
-        when route\find("GET /") != nil
-          res\send req
+          verbose "get state of all sw"
 
         else
           res\status 404
           res\send()
+          verbose "not found"
 
       collectgarbage()

@@ -1,25 +1,26 @@
+-- gpio state inverted
+LOW = gpio.HIGH
+HIGH = gpio.LOW
+
 class Switch
   new: (pin) =>
     @pin = pin
-    gpio.mode @pin, gpio.OUTPUT, gpio.PULLUP
+    @value = LOW
+    gpio.mode @pin, gpio.OUTPUT
+    gpio.write @pin, @value
 
+  -- gpio state inverted
   state: =>
-    gpio.read(@pin)
+    if @value == LOW then HIGH else LOW
 
-  toggle: (value) =>
-    switch value
-      when gpio.LOW
-        gpio.write @pin, gpio.LOW
-      when gpio.HIGH
-        gpio.write @pin, gpio.HIGH
-      else
-        gpio.write @pin, if @state() == gpio.LOW then gpio.HIGH else gpio.LOW
+  toggle: (@value = if @value == LOW then HIGH else LOW) =>
+    gpio.write @pin, @value
     return @
     
   on: =>
-    @toggle gpio.HIGH
+    @toggle HIGH
 
   off: =>
-    @toggle gpio.LOW
+    @toggle LOW
 
 return Switch
