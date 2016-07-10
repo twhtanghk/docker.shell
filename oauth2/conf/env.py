@@ -5,20 +5,22 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
 
 ROOT_URLCONF = 'organization.urls'
 
-SERVERURL = 'https://mob.myvnc.com/org'
-LOGIN_REDIRECT_URL = 'accounts/profile/'
-LOGIN_URL = 'accounts/login/'
-LOGOUT_URL = 'accounts/logout/'
+SERVERURL = 'https://mob.myvnc.com'
+FORCE_SCRIPT_NAME = '/org'
+
+LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + '/accounts/profile/'
+LOGIN_URL = FORCE_SCRIPT_NAME + '/accounts/login/'
+LOGOUT_URL = FORCE_SCRIPT_NAME + '/accounts/logout/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = os.path.join(SERVERURL, "static/")
+STATIC_URL = os.path.join(SERVERURL, FORCE_SCRIPT_NAME, "static/")
 
 DEBUG = False    # set it to False for production environment and deploy static files on production environment accordingly
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['mob.myvnc.com', 'localhost', '127.0.0.1']
 
 DATABASES = {
     'default': {
@@ -71,18 +73,16 @@ REST_FRAMEWORK = {
 }
 
 # email setting
-EMAIL_BACKEND = 'lib.backend.Notes'     # comment this setting to send mail by default smtp backend
-DEFAULT_FROM_EMAIL = 'user@abc.com'     # default sender email address
+#EMAIL_BACKEND = 'lib.backend.Notes'     # comment this setting to send mail by default smtp backend
+DEFAULT_FROM_EMAIL = 'twhtanghk@gmail.com'     # default sender email address
 # web service
-EMAIL_HOST = 'http://localhost:8001/mail/api/mail/' 
+#EMAIL_HOST = 'http://localhost:8001/mail/api/mail/' 
 # gmail
-"""
 EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "user@gmail.com"
-EMAIL_HOST_PASSWORD = "password here"
-"""
+EMAIL_HOST_USER = "twhtanghk@gmail.com"
+EMAIL_HOST_PASSWORD = "Pass1234!"
 # abc.com
 """
 EMAIL_HOST = 'smtpa.abc.com' 
