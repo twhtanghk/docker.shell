@@ -2,10 +2,12 @@ Req = require "req"
 Res = require "res"
 Switch = require "sw"
 Thermistor = require "thermistor"
+Motor = require "motor"
 log = require "log"
 
 temp = Thermistor()
-sw = {Switch(1), Switch(2)}
+sw = { Switch(1), Switch(2) }
+motor = { fan: Motor(5) }
 
 index = (url) ->
   tonumber url\match "/(%d+)"
@@ -27,6 +29,15 @@ with net.createServer net.TCP
         when route\find("GET /temp") != nil
           res\send "#{string.format "%02.2f", temp\c()} C"
           verbose 'get temperature'
+
+        when route\find("PUT /motor/%a+/%d+") != nil
+          device, val = route\match "PUT /motor/(%a+)/(%d+)"
+          val = tonumber val
+          log.debug device
+          log.debug val
+          motor[device]\speed val
+          res\send()
+          verbose "#{device} speed #{val}"
 
         when route\find("PUT /sw/%d+/toggle") != nil
           i = index req.url
@@ -59,4 +70,4 @@ with net.createServer net.TCP
           res\send()
           verbose "not found"
 
-      collectgarbage()
+      -- collectgarbage()
