@@ -1,10 +1,10 @@
 ln = (x) ->
   ret = 0
-  value = (x - 1) / (x + 1)
-  last = value
+  last = (x - 1) / (x + 1)
+  sq = last * last
   for i = 1, 10000, 2
     ret += (1 / i) * last
-    last *= value * value
+    last *= sq
   return 2 * ret
 
 return ln
