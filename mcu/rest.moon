@@ -24,72 +24,95 @@ with net.createServer net.TCP
       route = "#{req.method} #{req.url}"      
       verbose = (msg) ->
         log.info "#{route}: #{msg}"
+      clean = ->
+        client\close()
+        req = nil
+        res = nil
+        data = nil
+        client = nil
+        collectgarbage()
+        log.debug "heap: #{node.heap()}"
 
       switch true
 
         when route\find("GET /temp/%a+") != nil
           name = route\match "GET /temp/(%a+)"
-          res\send ctrl.temp[name]\c()
-          verbose "get #{name} temperature"
+          res\send ctrl.temp[name]\c(), ->
+            verbose "get #{name} temperature"
+            clean()
 
         when route\find("GET /temp") != nil
           ret = {}
           for name, device in pairs ctrl.temp
             ret[name] = device\c()
-          res\send ret
-          verbose 'get temperature'
+          res\send ret, ->
+            verbose 'get temperature'
+            clean()
 
         when route\find("GET /motor") != nil
           ret = {}
           for name, device in pairs ctrl.motor
             ret[name] = device\state()
-          res\send ret
-          verbose 'get motor'
+          res\send ret, ->
+            verbose 'get motor'
+            clean()
 
         when route\find("PUT /motor/%a+/%d+") != nil
           device, val = route\match "PUT /motor/(%a+)/(%d+)"
           val = tonumber val
           ctrl.motor[device]\speed val
-          res\send()
-          verbose "#{device} speed #{val}"
+          res\send "", ->
+            verbose "#{device} speed #{val}"
+            clean()
 
         when route\find("PUT /sw/%a+/toggle") != nil
           name = route\match "PUT /sw/(%a+)/toggle"
           ctrl.sw[name]\toggle()          
-          res\send()
-          verbose "toggle sw #{i}"
+          res\send "", ->
+            verbose "toggle sw #{name}"
+            clean()
 
         when route\find("PUT /sw/%a+/on") != nil
           name = route\match "PUT /sw/(%a+)/toggle"
           ctrl.sw[name]\on()          
-          res\send()
+          res\send "", ->
+            verbose "on sw #{name}"
+            clean()
 
         when route\find("PUT /sw/%a+/off") != nil
           name = route\match "PUT /sw/(%a+)/toggle"
           ctrl.sw[name]\off()          
-          res\send()
-          verbose "off sw #{i}"
+          res\send "", ->
+            verbose "off sw #{name}"
+            clean()
 
         when route\find("GET /sw/%a+") != nil
           name = route\match "PUT /sw/(%a+)/toggle"
-          res\send ctrl.sw[name]\state()
-          verbose "get state of sw #{i}"
+          res\send ctrl.sw[name]\state(), ->
+            verbose "get state of sw #{name}"
+            clean()
 
         when route\find("GET /sw") != nil
           ret = {}
           for name, device in pairs ctrl.sw
             ret[name] = device\state()
-          res\send ret
-          verbose "get state of all sw"
+          res\send ret, ->
+            verbose "get state of all sw"
+            clean()
+
+	when route\find("GET /heap") != nil
+          res\send {heap: node.heap()}, ->
+            verbose "get heap"
+            clean()
 
 	when route\find("GET /reset") != nil
-          res\send()
-          verbose "reset"
-          node.restart()
+          res\send "", ->
+            verbose "reset"
+            clean()
+            node.restart()
 
         else
           res\status 404
-          res\send()
-          verbose "not found"
-
-      collectgarbage()
+          res\send "", ->
+            verbose "not found"
+            clean()
