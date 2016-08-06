@@ -12,6 +12,6 @@ class Motor
 
   state: =>
     pwm.getclock @pin
-    pwd.getduty @pin
+    pwm.getduty @pin
    
 return Motor

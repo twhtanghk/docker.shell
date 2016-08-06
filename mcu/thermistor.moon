@@ -10,10 +10,14 @@ class Thermistor
 
   k: =>
     @enable\on()
-    r1 = @r2 * ((1024 / adc.read(@pin)) - 1)
+    value = adc.read(@pin)
     @enable\off()
-    temp = ln r1
-    return 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temp * temp)) * temp)
+    ret = 0
+    if value != 0
+      r1 = @r2 * ((1024 / value) - 1)
+      temp = ln r1
+      ret = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temp * temp)) * temp)
+    return ret
 
   c: =>
     return @k() - 273.15

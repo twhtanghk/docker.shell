@@ -5,21 +5,16 @@ Thermistor = require "thermistor"
 Motor = require "motor"
 log = require "log"
 
-temp = 
-  evaporator: Thermistor(5)
-  condenser: Thermistor(6)
-sw = 
-  valve: SW.NSwitch(1)
-  led: SW.NSwitch(2)
-motor = 
-  fan: Motor(3)
-  pump: Motor(4)
-
-index = (url) ->
-  tonumber url\match "/(%d+)"
-
-action = (url) ->
-  url\match "/%d+/(%a+)"
+ctrl =
+  temp: 
+    evaporator: Thermistor(5)
+    condenser: Thermistor(6)
+  sw:
+    valve: SW.NSwitch(1)
+    led: SW.NSwitch(2)
+  motor:
+    fan: Motor(3)
+    pump: Motor(4)
 
 with net.createServer net.TCP
   \listen 80, (conn) ->
@@ -33,49 +28,56 @@ with net.createServer net.TCP
       switch true
 
         when route\find("GET /temp/%a+") != nil
-          device = route\match "GET /temp/(%a+)"
-          res\send temp[device]\c()
-          verbose "get #{device} temperature"
+          name = route\match "GET /temp/(%a+)"
+          res\send ctrl.temp[name]\c()
+          verbose "get #{name} temperature"
 
         when route\find("GET /temp") != nil
           ret = {}
-          for name, device in pairs temp
+          for name, device in pairs ctrl.temp
             ret[name] = device\c()
           res\send ret
           verbose 'get temperature'
 
+        when route\find("GET /motor") != nil
+          ret = {}
+          for name, device in pairs ctrl.motor
+            ret[name] = device\state()
+          res\send ret
+          verbose 'get motor'
+
         when route\find("PUT /motor/%a+/%d+") != nil
           device, val = route\match "PUT /motor/(%a+)/(%d+)"
           val = tonumber val
-          motor[device]\speed val
+          ctrl.motor[device]\speed val
           res\send()
           verbose "#{device} speed #{val}"
 
         when route\find("PUT /sw/%a+/toggle") != nil
-          i = index req.url
-          sw[i]\toggle()          
+          name = route\match "PUT /sw/(%a+)/toggle"
+          ctrl.sw[name]\toggle()          
           res\send()
           verbose "toggle sw #{i}"
 
         when route\find("PUT /sw/%a+/on") != nil
-          i = index req.url
-          sw[i]\on()          
+          name = route\match "PUT /sw/(%a+)/toggle"
+          ctrl.sw[name]\on()          
           res\send()
 
         when route\find("PUT /sw/%a+/off") != nil
-          i = index req.url
-          sw[i]\off()          
+          name = route\match "PUT /sw/(%a+)/toggle"
+          ctrl.sw[name]\off()          
           res\send()
           verbose "off sw #{i}"
 
         when route\find("GET /sw/%a+") != nil
-          i = index req.url
-          res\send sw[i]\state()
+          name = route\match "PUT /sw/(%a+)/toggle"
+          res\send ctrl.sw[name]\state()
           verbose "get state of sw #{i}"
 
         when route\find("GET /sw") != nil
           ret = {}
-          for name, device in pairs sw
+          for name, device in pairs ctrl.sw
             ret[name] = device\state()
           res\send ret
           verbose "get state of all sw"
@@ -90,4 +92,4 @@ with net.createServer net.TCP
           res\send()
           verbose "not found"
 
-      -- collectgarbage()
+      collectgarbage()
