@@ -3,14 +3,16 @@
 Switch = require("sw").Switch
 
 class Voltmeter
-  new: (enablePin, @pin = 0, @v=3.3) =>
+  @v: 3.3
+
+  new: (enablePin) =>
     @enable = Switch(enablePin)
     adc.force_init_mode adc.INIT_ADC
 
   value: =>
     @enable\on()
-    ret = adc.read(@pin) * @v / 1024
+    ret = adc.read(0)
     @enable\off()
-    return ret
+    return ret * @@v / 1024
 
 return Voltmeter

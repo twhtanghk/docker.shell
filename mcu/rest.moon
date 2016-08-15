@@ -1,20 +1,7 @@
 Req = require "req"
 Res = require "res"
-SW = require "sw"
-Thermistor = require "thermistor"
-Motor = require "motor"
 log = require "log"
-
-ctrl =
-  temp: 
-    evaporator: Thermistor(5)
-    condenser: Thermistor(6)
-  sw:
-    valve: SW.NSwitch(1)
-    led: SW.NSwitch(2)
-  motor:
-    fan: Motor(3)
-    pump: Motor(4)
+ctrl = require "device"
 
 with net.createServer net.TCP
   \listen 80, (conn) ->
@@ -35,16 +22,11 @@ with net.createServer net.TCP
 
       switch true
 
-        when route\find("GET /temp/%a+") != nil
-          name = route\match "GET /temp/(%a+)"
-          res\send ctrl.temp[name]\c(), ->
-            verbose "get #{name} temperature"
-            clean()
-
-        when route\find("GET /temp") != nil
+        when route\find("GET /status") != nil
           ret = {}
           for name, device in pairs ctrl.temp
             ret[name] = device\c()
+          ret.volt = ctrl.volt.input\value()
           res\send ret, ->
             verbose 'get temperature'
             clean()
