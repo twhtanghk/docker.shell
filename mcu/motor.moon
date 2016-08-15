@@ -1,17 +1,16 @@
 -- setup pin to contorl motor speed
 class Motor
-  new: (@pin, @val = 0) =>
-    pwm.setup @pin, 1000, @val
+  new: (@pin) =>
+    pwm.setup @pin, 1000, 0
     pwm.start @pin
 
-  speed: (@val = 0) =>
-    pwm.setduty @pin, @val
+  speed: (val = 0) =>
+    pwm.setduty @pin, val
 
   stop: =>
     pwm.stop @pin
 
-  state: =>
-    pwm.getclock @pin
+  value: =>
     pwm.getduty @pin
    
 return Motor

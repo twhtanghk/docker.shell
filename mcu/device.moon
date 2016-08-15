@@ -4,13 +4,10 @@ Thermistor = require "thermistor"
 Motor = require "motor"
 
 return {
-  temp:
-    evap: Thermistor(1)
-    cond: Thermistor(2)
-  volt:
-    input: Voltmeter(3)
-  motor:
-    evap: Motor(4)
-    cond: Motor(5)
-    pump: Motor(6)
+  tempEvap: Thermistor(1)
+  tempCond: Thermistor(2)
+  voltIn: Voltmeter(3)
+  motorEvap: Motor(4)
+  motorCond: Motor(5)
+  motorPump: Motor(6)
 }
