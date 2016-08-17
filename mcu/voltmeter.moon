@@ -4,6 +4,9 @@ Switch = require("sw").Switch
 
 class Voltmeter
   @v: 3.3
+  @r1: 100000
+  @r2: 10000
+  @ratio: 1 + (@r1 / @r2)
 
   new: (enablePin) =>
     @enable = Switch(enablePin)
@@ -13,6 +16,6 @@ class Voltmeter
     @enable\on()
     ret = adc.read(0)
     @enable\off()
-    return ret * @@v / 1024
+    return @@ratio * ret * @@v / 1024
 
 return Voltmeter
