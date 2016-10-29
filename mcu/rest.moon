@@ -34,28 +34,28 @@ with net.createServer net.TCP
         when route\find("PUT /motor/%a+/%d+") != nil
           device, val = route\match "PUT /motor/(%a+)/(%d+)"
           val = tonumber val
-          ctrl.motor[device]\speed val
+          ctrl[device]\speed val
           res\send "", ->
             verbose "#{device} speed #{val}"
             clean()
 
         when route\find("PUT /sw/%a+/toggle") != nil
           name = route\match "PUT /sw/(%a+)/toggle"
-          ctrl.sw[name]\toggle()          
+          ctrl[name]\toggle()          
           res\send "", ->
             verbose "toggle sw #{name}"
             clean()
 
         when route\find("PUT /sw/%a+/on") != nil
           name = route\match "PUT /sw/(%a+)/toggle"
-          ctrl.sw[name]\on()          
+          ctrl[name]\on()          
           res\send "", ->
             verbose "on sw #{name}"
             clean()
 
         when route\find("PUT /sw/%a+/off") != nil
           name = route\match "PUT /sw/(%a+)/toggle"
-          ctrl.sw[name]\off()          
+          ctrl[name]\off()          
           res\send "", ->
             verbose "off sw #{name}"
             clean()
