@@ -1,0 +1,13 @@
+version: '2'
+services:
+  mosca:
+    image: matteocollina/mosca
+    ports:
+      - 80:80
+      - 1883:1883
+    volumes:
+      - ${COMPOSEROOT}/mosca/data:/db
+    env_file: 
+      - ../.env
+    environment:
+      SERVICE_NAME: mosca
