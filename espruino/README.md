@@ -1,7 +1,7 @@
 # start container
 bin/up espruino
 
-## exec bash for espruino
+# exec bash for espruino
 docker exec -it espruino_espruino_1 bash
 ```
 # compile esp-open-sdk
