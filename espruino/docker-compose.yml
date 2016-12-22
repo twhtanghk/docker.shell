@@ -1,0 +1,9 @@
+version: '2'
+services:
+  espruino:
+    image: twhtanghk/espruino
+    devices:
+      - /dev/ttyUSB0
+    env_file:
+      - ../.env
+      - ./.env
