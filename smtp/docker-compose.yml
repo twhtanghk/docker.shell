@@ -1,0 +1,11 @@
+version: '2'
+services:
+  smtp:
+    image: namshi/smtp
+    ports:
+      - 25
+    dns:
+      - 8.8.8.8
+    env_file: 
+      - ../.env
+      - ./env
