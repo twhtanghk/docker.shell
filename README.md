@@ -6,23 +6,27 @@ up, down, pull container
 	
 ## bin/up container -d
 ```
-up mosca -d
+bin/up mosca -d
 ```
 
 ## bin/down container
 ```
-down mosca
+bin/down mosca
 ```
 
 ## bin/pull container
 ```
-pull mosca
+bin/pull mosca
 ```
 
 ## bin/clean
+rm exited containers, unused images, orphaned docker volumes
+```
+bin/clean
+```
 
 ## bin/docker-compose
-start container to run docker compose ui
+start container to run docker compose ui and it is equivalent to 'bin/up composeui'
 ```
-bin/docker-compose -f compose/composeui/docker-compose.yml up
+bin/docker-compose -f composeui/docker-compose.yml up
 ```
