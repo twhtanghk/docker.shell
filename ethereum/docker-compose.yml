@@ -1,0 +1,9 @@
+version: '2'
+services:
+  ethereum:
+    image: ethereum/client-go
+    volumes:
+      - ${COMPOSEROOT}/ethereum/data:/root
+    env_file:
+      - ../.env
+    entrypoint: top -b -d 1000

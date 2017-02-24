@@ -1,0 +1,10 @@
+version: '2'
+services:
+  bitcoin:
+    image: beli/bitcoin
+    volumes:
+      - ${COMPOSEROOT}/bitcoin/data:/bitcoin/data
+    env_file:
+      - ../.env
+    environment:
+      - CONF_RPCPASSWORD=password
