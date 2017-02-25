@@ -1,0 +1,9 @@
+version: '2'
+services:
+  adb:
+    image: sorccu/adb
+    privileged: true
+    volumes:
+      - /dev:/dev
+      - /tmp:/tmp
+    entrypoint: top -b -d 1000
