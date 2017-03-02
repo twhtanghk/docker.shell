@@ -1,0 +1,11 @@
+version: '2'
+services:
+  gnuradio:
+    image: marcelmaatkamp/gnuradio
+    privileged: true
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=:0.0
+    entrypoint: top -b -d 1000
