@@ -1,0 +1,28 @@
+version: '2'
+services:
+  consul:
+    image: progrium/consul
+    networks:
+      - nginx_default
+    ports:
+      - ${INTRANETIP}:8500:8500
+      - ${INTRANETIP}:53:53/tcp
+      - ${INTRANETIP}:53:53/udp
+    command: -server -bootstrap
+    volumes:
+      - ${COMPOSEROOT}/consul/consul.json:/config/consul.json
+
+  registrator:
+    depends_on:
+      - consul
+    image: gliderlabs/registrator
+    container_name: registrator
+    hostname: registrator
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    command: consul://${INTRANETIP}:8500
+
+networks:
+  nginx_default:
+    external: true
