@@ -1,4 +1,6 @@
 #!/bin/bash
 
-# e.g. x11 jess/rdesktop 10.1.1.1:3389
+# e.g. 
+#   - x11 jess/rdesktop 10.1.1.1:3389
+#   - x11 michaelaboeckler/vnc-viewer 10.1.1.1
 docker run -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix $@
