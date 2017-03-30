@@ -1,0 +1,14 @@
+version: '2'
+services:
+  mobile_mongo:
+    image: mongo 
+    ports:
+      - 27017
+    command: mongod --directoryperdb
+
+  mobile:
+    depends_on:
+      - mobile_mongo
+    image: twhtanghk/mobile
+    ports:
+      - 1337

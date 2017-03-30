@@ -1,0 +1,9 @@
+version: '2'
+services:
+  xrdp:
+    image: twhtanghk/docker.xrdp
+    network_mode: host
+    ports:
+      - 3389
+    volumes:
+      - ${COMPOSEROOT}/xrdp:/home/user

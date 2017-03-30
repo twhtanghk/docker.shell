@@ -1,0 +1,8 @@
+version: '2'
+services:
+  pox:
+    image: twhtanghk/pox
+    ports:
+      - 6633:6633
+    volumes:
+      - ${COMPOSEROOT}/pox:/root

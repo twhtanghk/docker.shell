@@ -1,28 +1,19 @@
 version: '2'
 services:
   consul:
-    image: progrium/consul
-    networks:
-      - nginx_default
-    ports:
-      - ${INTRANETIP}:8500:8500
-      - ${INTRANETIP}:53:53/tcp
-      - ${INTRANETIP}:53:53/udp
-    command: -server -bootstrap
+    image: consul
+    network_mode: host
+    command: agent -config-dir /consul/config -server -bootstrap -ui
     volumes:
-      - ${COMPOSEROOT}/consul/consul.json:/config/consul.json
+      - ${COMPOSEROOT}/consul/consul.json:/consul/config/consul.json
+    environment:
+      - CONSUL_ALLOW_PRIVILEGED_PORTS=
 
   registrator:
     depends_on:
       - consul
     image: gliderlabs/registrator
-    container_name: registrator
-    hostname: registrator
     network_mode: host
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
     command: consul://${INTRANETIP}:8500
-
-networks:
-  nginx_default:
-    external: true

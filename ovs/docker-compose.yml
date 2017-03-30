@@ -1,0 +1,11 @@
+version: '2'
+services:
+  ovs:
+    image: socketplane/openvswitch
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    network_mode: host
+    volumes:
+      - /lib/modules:/lib/modules
+      - ${COMPOSEROOT}/ovs:/root

@@ -1,0 +1,22 @@
+version: '2'
+services:
+  mysql:
+    image: mariadb
+    container_name: mysql
+    hostname: mysql
+    environment:
+      - MYSQL_DATABASE=org
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 3306
+    volumes:
+      - ${COMPOSEROOT}/oauth2/data:/var/lib/mysql
+
+  oauth2:
+    depends_on:
+      - mysql
+    image: twhtanghk/oauth2
+    container_name: oauth2
+    hostname: oauth2
+    ports:
+      - 8000

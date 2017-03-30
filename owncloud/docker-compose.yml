@@ -1,0 +1,10 @@
+version: '2'
+services:
+  owncloud:
+    image: owncloud
+    ports:
+      - 80
+    volumes:
+      - ${COMPOSEROOT}/owncloud/config:/var/www/html/config
+      - ${COMPOSEROOT}/apps:/var/www/html/apps
+      - ${COMPOSEROOT}/data:/var/www/html/data

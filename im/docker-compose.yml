@@ -1,0 +1,16 @@
+version: '2'
+services:
+  im_mongo:
+    image: mongo
+    ports:
+      - 27017
+    volumes:
+      - ${COMPOSEROOT}/im/data:/data/db
+    command: mongod --directoryperdb
+
+  imsails:
+    depends_on:
+      - im_mongo
+    image: twhtanghk/imsails
+    ports:
+      - 1337
