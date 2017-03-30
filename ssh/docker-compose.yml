@@ -1,0 +1,9 @@
+version: '2'
+services:
+  ssh:
+    image: twhtanghk/ssh
+    ports:
+      - 1337
+    env_file:
+      - ./.env
+      - ../.env
