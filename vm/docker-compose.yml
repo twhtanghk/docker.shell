@@ -5,6 +5,8 @@ services:
     ports:
       - 27017
     command: mongod --directoryperdb 
+    volumes:
+      - ${COMPOSEROOT}/vm/db:/data/db
     environment:
       - SERVICE_NAME=vagrant_mongo
     env_file: 
@@ -20,6 +22,7 @@ services:
       - /lib/modules:/lib/modules
       - /var/run/libvirt:/var/run/libvirt
       - /var/lib/libvirt:/var/lib/libvirt
+      - ${COMPOSEROOT}/vm/data:/usr/src/app/vm
     env_file: 
       - ./.env
       - ../.env
