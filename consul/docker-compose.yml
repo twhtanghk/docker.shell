@@ -2,8 +2,14 @@ version: '2'
 services:
   consul:
     image: consul
-    network_mode: host
+    networks:
+      default:
+        ipv4_address: 192.168.65.32
     command: agent -config-dir /consul/config -server -bootstrap -ui
+    ports:
+      - 53/tcp
+      - 53/udp
+      - 8500
     volumes:
       - ${COMPOSEROOT}/consul/consul.json:/consul/config/consul.json
     environment:
@@ -13,7 +19,12 @@ services:
     depends_on:
       - consul
     image: gliderlabs/registrator
-    network_mode: host
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
-    command: consul://${INTRANETIP}:8500
+    command: consul://192.168.65.32:8500
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 192.168.65.0/24
