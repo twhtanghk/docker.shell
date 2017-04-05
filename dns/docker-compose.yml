@@ -2,11 +2,11 @@ version: '2'
 services:
   bind:
     image: sameersbn/bind
-    container_name: bind
-    hostname: bind
     ports:
       - 10000/tcp
       - 53/tcp
       - 53/udp
     volumes:
-      - ${COMPOSEROOT}/bind:/data
+      - ${COMPOSEROOT}/dns/data:/data
+    env_file:
+      - ../.env
