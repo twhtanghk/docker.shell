@@ -4,5 +4,10 @@ services:
     image: mariadb
     ports:
       - 3306
+    volumes:
+      - ${COMPOSEROOT}/mysql/data:/var/lib/mysql
+    env_file:
+      - ../.env
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+
