@@ -1,17 +1,17 @@
 version: '2'
 services:
-  hotspot_mongo:
-    image: mongo
-    ports:
-      - 27017
-    command: mongod --directoryperdb   
-    
   hotspot:
-    depends_on:
-      - hotspot_mongo
     image: twhtanghk/hotspot
+    external_links:
+      - mongo
+    networks:
+      - mongo_default
     ports:
       - 1337
     env_file:
       - ./.env
       - ../.env
+
+networks:
+  mongo_default:
+    external: true
