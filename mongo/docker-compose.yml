@@ -6,3 +6,6 @@ services:
       - 27017
     volumes:
       - ${COMPOSEROOT}/mongo/data:/data/db
+    command: mongod --directoryperdb
+    env_file:
+      - ../.env
