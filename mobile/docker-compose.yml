@@ -1,14 +1,19 @@
 version: '2'
 services:
-  mobile_mongo:
-    image: mongo 
-    ports:
-      - 27017
-    command: mongod --directoryperdb
-
   mobile:
-    depends_on:
-      - mobile_mongo
     image: twhtanghk/mobile
+    external_links:
+      - mongo
+    networks:
+      - mongo_default
     ports:
       - 1337
+    volumes:
+      - ${COMPOSEROOT}/mobile/apn.p12:/usr/src/app/config/env/apn.p12
+    env_file:
+      - ../.env
+      - ./.env
+
+networks:
+  mongo_default:
+    external: true
