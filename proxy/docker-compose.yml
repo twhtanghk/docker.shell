@@ -1,15 +1,5 @@
 version: '2'
 services:
-  proxy_mongo:
-    image: mongo
-    ports:
-      - 27017
-    volumes:
-      - ${COMPOSEROOT}/proxy/data:/data/db
-    command: mongod --directoryperdb
-    env_file:
-      - ../.env
-
   echo:
     image: solsson/http-echo
     ports: 
@@ -19,11 +9,18 @@ services:
 
   sails_proxy:
     depends_on:
-      - proxy_mongo
       - echo
     image: twhtanghk/sails_proxy
+    external_links:
+      - mongo
+    networks:
+      - mongo_default
     ports:
-      - ${INTRANETIP}:80:1337
+      - 1337:1337
     env_file:
       - ./.env
       - ../.env
+
+networks:
+  mongo_default:
+    external: true
