@@ -11,9 +11,8 @@ services:
     depends_on:
       - echo
     image: twhtanghk/sails_proxy
-    external_links:
-      - mongo
     networks:
+      - default
       - mongo_default
     ports:
       - 1337:1337
@@ -22,5 +21,6 @@ services:
       - ../.env
 
 networks:
+  default:
   mongo_default:
     external: true
