@@ -4,8 +4,14 @@ services:
     image: mongo
     ports:
       - 27017
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse
     volumes:
-      - ${COMPOSEROOT}/mongo/data:/data/db
+      - ./entrypoint.sh:/newEntrypoint.sh
+    entrypoint: /newEntrypoint.sh
     command: mongod --directoryperdb
     env_file:
       - ../.env
+      - ./.env
