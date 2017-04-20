@@ -4,10 +4,16 @@ services:
     image: mariadb
     ports:
       - 3306
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse
     volumes:
-      - ${COMPOSEROOT}/mysql/data:/var/lib/mysql
+      - ./entrypoint.sh:/newEntrypoint.sh
+    entrypoint: /newEntrypoint.sh
+    command: mysqld
     env_file:
       - ../.env
+      - ./.env
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-
