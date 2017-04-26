@@ -1,11 +1,11 @@
 {
-  "domain": "${domain}",
+  "domain": "consul",
   "data_dir": "/consul/data",
   "bind_addr": "0.0.0.0",
   "client_addr": "0.0.0.0",
   "ports": {
     "dns": 53
   },
-  "recursor": "8.8.8.8",
+  "recursor": "10.106.32.230",
   "disable_update_check": true
 }

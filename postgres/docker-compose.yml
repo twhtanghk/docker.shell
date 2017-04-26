@@ -1,0 +1,15 @@
+version: '2'
+services:
+  postgres:
+    image: postgres
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse
+    volumes:
+      - ./entrypoint.sh:/newEntrypoint.sh
+    entrypoint: /newEntrypoint.sh
+    command: postgres
+    env_file:
+      - ../.env
+      - ./.env

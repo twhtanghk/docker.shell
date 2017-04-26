@@ -1,0 +1,8 @@
+version: '2'
+services:
+  metasploit:
+    image: linuxkonsult/kali-metasploit
+    volumes:
+      - ./init.sh:/init.sh
+    env_file:
+      - ../.env
