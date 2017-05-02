@@ -1,28 +1,14 @@
 version: '2'
 services:
-  vagrant_mongo:
-    image: mongo
-    ports:
-      - 27017
-    command: mongod --directoryperdb 
-    volumes:
-      - ${COMPOSEROOT}/vm/db:/data/db
-    environment:
-      - SERVICE_NAME=vagrant_mongo
-    env_file: 
-      - ../.env
-
   vagrant:
     image: dorissschoi/vagrantvm
-    depends_on: 
-      - vagrant_mongo
     privileged: true
     network_mode: host
     volumes:
       - /lib/modules:/lib/modules
       - /var/run/libvirt:/var/run/libvirt
       - /var/lib/libvirt:/var/lib/libvirt
-      - ${COMPOSEROOT}/vm/data:/usr/src/app/vm
+      - ${COMPOSEROOT}/vm/data:/usr/src/app/vm/data
     env_file: 
       - ./.env
       - ../.env
