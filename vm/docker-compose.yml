@@ -8,7 +8,8 @@ services:
       - /lib/modules:/lib/modules
       - /var/run/libvirt:/var/run/libvirt
       - /var/lib/libvirt:/var/lib/libvirt
-      - ${COMPOSEROOT}/vm/data:/usr/src/app/vm/data
+      - ./exports:/etc/exports
+      - ./data:/usr/src/app/vm/data
     env_file: 
       - ./.env
       - ../.env
