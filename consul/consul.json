@@ -6,6 +6,6 @@
   "ports": {
     "dns": 53
   },
-  "recursor": "10.106.32.230",
+  "recursor": "192.168.121.1",
   "disable_update_check": true
 }
