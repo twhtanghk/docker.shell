@@ -1,0 +1,11 @@
+version: '2'
+services:
+  ais:
+    image: twhtanghk/ais
+    privileged: true
+    env_file:
+      - ../.env
+    volumes:
+      - ./rtl-ais:/usr/src/app
+      - /dev:/dev
+    entrypoint: top -b -d 1000
