@@ -1,7 +1,7 @@
 version: '2'
 services:
   gnuradio:
-    image: marcelmaatkamp/gnuradio
+    image: twhtanghk/gnuradio
     privileged: true
     volumes:
       - /dev/bus/usb:/dev/bus/usb
