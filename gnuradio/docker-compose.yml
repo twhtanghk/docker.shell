@@ -6,6 +6,8 @@ services:
     volumes:
       - /dev:/dev
       - /tmp/.X11-unix:/tmp/.X11-unix
+      - /home/myroot/.config/pulse/cookie:/root/.config/pulse/cookie
     environment:
       - DISPLAY=:0.0
+      - PULSE_SERVER=tcp:172.17.0.1:4713
     entrypoint: top -b -d 1000
