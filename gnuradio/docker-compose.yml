@@ -1,7 +1,7 @@
 version: '2'
 services:
   gnuradio:
-    image: marcelmaatkamp/pybombs-gnuradio-rtlsdr
+    image: twhtanghk/pybombs-gr
     privileged: true
     volumes:
       - /dev:/dev
