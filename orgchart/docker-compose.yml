@@ -1,0 +1,15 @@
+version: '2'
+services:
+  orgchart:
+    image: ewnchui/orgchart
+    networks:
+      - mongo_default
+    ports:
+      - 1337
+    env_file:
+      - ./.env
+      - ../.env
+
+networks:
+  mongo_default:
+    external: true
