@@ -1,0 +1,21 @@
+version: '2'
+services:
+  mysql:
+    image: mariadb
+    ports:
+      - 3306
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse
+    volumes:
+      - ./lib.sh:/lib.sh
+      - ./entrypoint.sh:/entrypoint.sh
+      - ./logrotate.conf:/etc/logrotate.conf
+      - ./crontab:/var/spool/cron/crontabs/root
+    entrypoint: /entrypoint.sh
+    env_file:
+      - ../.env
+      - ./.env
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
