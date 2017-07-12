@@ -24,7 +24,7 @@ mountEncfs() {
 dbparam() {
   DBHOST=${DBHOST:+-h ${DBHOST}}
   DBUSER=${DBUSER:+-u ${DBUSER}}
-  DBPASS=${DBPASS:+-p ${DBPASS}}
+  DBPASS=${DBPASS:+--password=${DBPASS}}
 }
 
 # show databases in mariadb server
