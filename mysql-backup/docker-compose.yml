@@ -1,7 +1,7 @@
 version: '2'
 services:
   mysql:
-    image: twhtanghk/mariadb-backup
+    image: twhtanghk/mysql-backup
     ports:
       - 3306
     cap_add:
