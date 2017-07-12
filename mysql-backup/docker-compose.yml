@@ -2,15 +2,11 @@ version: '2'
 services:
   mysql:
     image: twhtanghk/mysql-backup
-    ports:
-      - 3306
     cap_add:
       - SYS_ADMIN
     devices:
       - /dev/fuse
     volumes:
-      - ./lib.sh:/root/lib.sh
-      - ./entrypoint.sh:/root/entrypoint.sh
       - ./logrotate.conf:/etc/logrotate.conf
       - ./crontab:/var/spool/cron/crontabs/root
     entrypoint: /root/entrypoint.sh

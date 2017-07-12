@@ -29,6 +29,7 @@ dbparam() {
 
 # show databases in mariadb server
 db() {
+  dbparam
   echo 'show databases' |mysql -sN ${DBHOST} ${DBUSER} ${DBPASS}
 }
 
@@ -42,6 +43,6 @@ backup() {
 # backup all databases to dir
 backupAll() {
   for i in $(db); do
-    backup $i $1
+    (backup $i $1)
   done
 }
