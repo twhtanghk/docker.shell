@@ -1,1 +1,2 @@
-0 20 * * 1-5 (. /lib.sh; dbparam; backupAll /mnt)
+0 20 * * 1-5 (. /root/lib.sh; backupAll /mnt) 2>/tmp/backup.err
+0 21 * * 1-5 /usr/sbin/logrotate /etc/logrotate.conf 2>/tmp/logrotate.err

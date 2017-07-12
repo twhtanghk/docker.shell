@@ -2,8 +2,8 @@
 
 . lib.sh
 
-install sshfs logrotate cron
-mount.encfs ${ENCHOST}:/data/backup /mnt
+mountEncfs ${ENCHOST}:/data/backup /mnt
 chown root.root /etc/logrotate.conf
 chown root.crontab /var/spool/cron/crontabs/root
-cron -f
+printenv |grep '^DB' |sed 's/^/export /g' >/root/env.sh
+cron -f -L 15

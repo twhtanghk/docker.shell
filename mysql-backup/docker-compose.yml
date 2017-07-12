@@ -1,7 +1,7 @@
 version: '2'
 services:
   mysql:
-    image: mariadb
+    image: twhtanghk/mariadb-backup
     ports:
       - 3306
     cap_add:
@@ -9,11 +9,11 @@ services:
     devices:
       - /dev/fuse
     volumes:
-      - ./lib.sh:/lib.sh
-      - ./entrypoint.sh:/entrypoint.sh
+      - ./lib.sh:/root/lib.sh
+      - ./entrypoint.sh:/root/entrypoint.sh
       - ./logrotate.conf:/etc/logrotate.conf
       - ./crontab:/var/spool/cron/crontabs/root
-    entrypoint: /entrypoint.sh
+    entrypoint: /root/entrypoint.sh
     env_file:
       - ../.env
       - ./.env

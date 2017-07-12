@@ -1,5 +1,4 @@
 # entrypoint.sh
-- install required packages sshfs, logrotate, cron
 - start cron daemon
 
 # lib.sh
@@ -10,4 +9,4 @@
 
 # crontab
 - root cron task for database backup
-
+- rotate backup files

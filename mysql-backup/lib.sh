@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ./env.sh
+
 # install debian packages
 # e.g.e install sshfs logrotate
 install() {
@@ -10,7 +12,7 @@ install() {
 
 # mount remote local
 # e.g. mount encfs:/data /mnt
-mount.encfs() {
+mountEncfs() {
   CUSER=mysql
   CUID=$(id -u ${CUSER})
   CGID=$(id -g ${CUSER})
@@ -33,6 +35,7 @@ db() {
 # backup database to dir
 # e.g. backup dbname /mnt
 backup() {
+  dbparam
   mysqldump ${DBHOST} ${DBUSER} ${DBPASS} $1 >$2/$1.sql
 }
 
