@@ -1,0 +1,14 @@
+version: '2'
+services:
+  mongo:
+    image: twhtanghk/mongo-backup
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse
+    volumes:
+      - ./logrotate.conf:/etc/logrotate.conf
+      - ./crontab:/var/spool/cron/crontabs/root
+    env_file:
+      - ../.env
+      - ./.env
