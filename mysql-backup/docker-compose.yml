@@ -9,7 +9,6 @@ services:
     volumes:
       - ./logrotate.conf:/etc/logrotate.conf
       - ./crontab:/var/spool/cron/crontabs/root
-    entrypoint: /root/entrypoint.sh
     env_file:
       - ../.env
       - ./.env
