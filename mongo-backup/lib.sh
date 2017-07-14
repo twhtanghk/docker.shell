@@ -30,14 +30,14 @@ dbparam() {
 # show databases in mariadb server
 db() {
   dbparam
-  echo 'show databases' |mongo --quiet ${DBHOST} ${DBUSER} ${DBPASS} |awk '{print $1}'
+  echo 'show databases' |mongo --quiet --authenticationDatabase admin ${DBHOST} ${DBUSER} ${DBPASS} |awk '{print $1}'
 }
 
 # backup database to dir
 # e.g. backup dbname /mnt
 backup() {
   dbparam
-  mongodump ${DBHOST} ${DBUSER} ${DBPASS} --db $1 --archive=$2/$1.mongo
+  mongodump --authenticationDatabase admin ${DBHOST} ${DBUSER} ${DBPASS} --db $1 --archive=$2/$1.mongo
 }
 
 # backup all databases to dir
