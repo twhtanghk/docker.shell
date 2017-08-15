@@ -1,0 +1,10 @@
+version: '2'
+services:
+  libvirt:
+    image: twhtanghk/libvirtd
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+      - ./data:/root
+    env_file: 
+      - ../.env
