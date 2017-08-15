@@ -14,7 +14,13 @@ RUN apt-get update \
 &&  git clone https://github.com/coreutils/gnulib .gnulib \
 &&  ./autogen.sh --no-git --gnulib-srcdir=./.gnulib \
 &&  make install \
+&&  echo "listen_tls = 0" >>/usr/local/etc/libvirt/libvirtd.conf \
+&&  echo "listen_tcp = 1" >>/usr/local/etc/libvirt/libvirtd.conf \
 &&  cd /root \
 &&  rm -rf libvirt
 
-cmd libvirtd
+EXPOSE 16509
+
+VOLUME /sys/fs/cgroup /var/lib/libvirt
+
+CMD libvirtd --listen
