@@ -1,15 +1,17 @@
 version: '2'
 services:
   vagrant:
-    image: dorissschoi/vagrantvm
+    image: twhtanghk/vagrantvm
     privileged: true
-    network_mode: host
+    ports:
+      - 1337
     volumes:
-      - /lib/modules:/lib/modules
-      - /var/run/libvirt:/var/run/libvirt
-      - /var/lib/libvirt:/var/lib/libvirt
-      - ./exports:/etc/exports
-      - ./data:/usr/src/app/vm/data
+      - ./data/run:/var/run/libvirt
+      - ./data/lib:/var/lib/libvirt
+      - ./data/vm:/usr/src/app/vm/data
+      - ./data/exports:/etc/exports
+      - ./data/boxes:/root/.vagrant.d/boxes
+      - ./data/qemu:/etc/libvirt/qemu
     env_file: 
       - ./.env
       - ../.env
