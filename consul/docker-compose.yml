@@ -23,7 +23,7 @@ services:
     image: gliderlabs/registrator
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
-    command: consul://192.168.65.32:8500
+    command: -internal consul://192.168.65.32:8500
     env_file:
       - ../.env
 
