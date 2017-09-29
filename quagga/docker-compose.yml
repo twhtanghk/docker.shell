@@ -1,0 +1,11 @@
+version: '2'
+services:
+  rip:
+    image: twhtanghk/quagga
+    network_mode: host
+    privileged: true
+    volumes:
+      - ./data/ripd.conf:/etc/quagga/ripd.conf
+    env_file:
+      - ../.env
+    command: bash -c "zebra -d && ripd"
