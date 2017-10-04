@@ -1,0 +1,9 @@
+version: '2'
+services:
+  novnc:
+    image: twhtanghk/novnc
+    ports: 
+      - 6080
+    env_file:
+      - ../.env
+    command: /bin/bash -c "/usr/src/app/utils/launch.sh --vnc vm:5900"

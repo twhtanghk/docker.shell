@@ -1,0 +1,11 @@
+<html>
+<head>
+  <script type="text/javascript">
+    url = new URL(location);
+    url.search = "path=" + url.pathname + 'websockify';
+    url.pathname = url.pathname + 'vnc.html';
+    location.assign(url.toString());
+  </script>
+</head>
+<body>
+</body>

@@ -11,6 +11,8 @@ RUN apt-get update \
 &&  pip install numpy \
 &&  git clone -b $VER $REPO $APP
 
+ADD index.html $APP
+
 WORKDIR $APP
 
 EXPOSE 6080
