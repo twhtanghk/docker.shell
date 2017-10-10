@@ -1,7 +1,7 @@
 version: '2'
 services:
   nfs:
-    image: twhtanghk/nfs
+    image: twhtanghk/nfs-ganesha
     privileged: true
     volumes:
       - ./ganesha.conf:/etc/ganesha/ganesha.conf
