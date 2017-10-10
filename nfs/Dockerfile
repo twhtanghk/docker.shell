@@ -1,8 +1,7 @@
-FROM debian
+FROM debian:unstable
 
-RUN echo 'deb http://ftp.debian.org/debian stretch-backports main' >>/etc/apt/sources.list \
-&&  apt-get update \
-&&  apt-get install -y nfs-ganesha nfs-ganesha-fsal \
+RUN apt-get update \
+&&  apt-get install -y nfs-ganesha nfs-ganesha-vfs nfs-ganesha-proxy \
 &&  apt-get clean \
 &&  rm -rf /var/lib/apt/lists/* \
 &&  mkdir /var/run/dbus /exports
