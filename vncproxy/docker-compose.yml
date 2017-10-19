@@ -7,4 +7,4 @@ services:
     env_file: 
       - ../.env
     volumes:
-      - ./production.coffee:/usr/src/app/config/env/production.coffee
+      - ./production.litcoffee:/usr/src/app/config/env/production.litcoffee
