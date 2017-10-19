@@ -12,6 +12,6 @@ services:
       - ./data/exports:/etc/exports
       - ./data/boxes:/root/.vagrant.d/boxes
       - ./data/qemu:/etc/libvirt/qemu
+      - ./production.coffee:/usr/src/app/config/env/production.coffee
     env_file: 
-      - ./.env
       - ../.env
