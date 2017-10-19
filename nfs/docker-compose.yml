@@ -3,7 +3,17 @@ services:
   nfs:
     image: twhtanghk/nfs-ganesha
     privileged: true
+    networks:
+      default:
+        ipv4_address: 192.168.33.2
     volumes:
       - ./ganesha.conf:/etc/ganesha/ganesha.conf
+      - ./data:/exports
     env_file:
       - ../.env
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 192.168.33.0/24
