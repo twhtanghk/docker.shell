@@ -9,7 +9,6 @@ services:
       - ./data/run:/var/run/libvirt
       - ./data/lib:/var/lib/libvirt
       - ./data/vm:/usr/src/app/vm/data
-      - ./data/exports:/etc/exports
       - ./data/boxes:/root/.vagrant.d/boxes
       - ./data/qemu:/etc/libvirt/qemu
       - ./production.coffee:/usr/src/app/config/env/production.coffee
