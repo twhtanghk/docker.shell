@@ -1,0 +1,10 @@
+version: '2'
+services:
+  glusterfs:
+    image: twhtanghk/glusterfs
+    privileged: true
+    volumes:
+      - ./data:/data
+      - ./config:/var/lib/glusterd
+    env_file:
+      - ../.env
