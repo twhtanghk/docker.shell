@@ -8,7 +8,7 @@ services:
       - 139:139
       - 445:445
     volumes:
-      - ${COMPOSEROOT}/samba:/share
+      - ./data:/share
     command: -u "user;password" -s "share;/share;yes;no;no"
     env_file:
       - ../.env
