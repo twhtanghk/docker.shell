@@ -1,0 +1,9 @@
+version: '2'
+services:
+  weex:
+    image: twhtanghk/weex
+    volumes:
+      - ./data:/root
+    env_file:
+      - ../.env
+    entrypoint: top -b -d 1000
