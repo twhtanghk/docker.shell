@@ -2,7 +2,9 @@ version: '2'
 services:
   weex:
     image: twhtanghk/weex
+    privileged: true
     volumes:
+      - /dev/bus/usb:/dev/bus/usb
       - ./data:/root
     env_file:
       - ../.env
