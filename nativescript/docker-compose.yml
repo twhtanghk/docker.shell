@@ -1,0 +1,11 @@
+version: '2'
+services:
+  nativescript:
+    image: twhtanghk/nativescript
+    privileged: true
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+      - ./data:/root
+    env_file:
+      - ../.env
+    entrypoint: top -b -d 1000
