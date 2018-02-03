@@ -9,6 +9,6 @@ services:
       - 445:445
     volumes:
       - ./data:/share
-    command: -u "user;password" -s "share;/share;yes;no;no"
+    command: -S -u "user;password" -s "share;/share;yes;no;no"
     env_file:
       - ../.env
