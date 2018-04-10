@@ -1,0 +1,10 @@
+version: '3'
+services:
+  ssl:
+    image: twhtanghk/openssl
+    env_file:
+      - ../.env
+    volumes:
+      - ./openssl.cnf:/etc/ssl/openssl.cnf
+      - ./data:/root
+    entrypoint: top -b -d 1000
