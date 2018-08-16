@@ -3,5 +3,6 @@
 # e.g. 
 #   - x11 jess/rdesktop 10.1.1.1:3389
 #   - x11 michaelaboeckler/vnc-viewer 10.1.1.1
+#   - x11 -v $PWD/src:/root twhtanghk/docker.printrun
 #   - x11 -v $PWD/src:/root --entrypoint /usr/local/blender/blender ikester/blender
 docker run -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix $@
