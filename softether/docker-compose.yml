@@ -1,0 +1,17 @@
+version: '2'
+services:
+  softether:
+    image: siomiz/softethervpn:debian
+    privileged: true
+    networks:
+      default:
+        ipv4_address: 192.168.31.3
+    ports:
+      - 443:443/tcp
+    env_file:
+      - ../.env
+      - ./.env
+networks:
+  default:
+    external:
+      name: samba_default
