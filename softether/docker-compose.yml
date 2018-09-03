@@ -1,17 +1,54 @@
 version: '2'
+
 services:
   softether:
     image: siomiz/softethervpn:debian
     privileged: true
     networks:
       default:
-        ipv4_address: 192.168.31.3
+        ipv4_address: 192.168.31.2
     ports:
       - 443:443/tcp
+    volumes:
+      - ./server.crt:/usr/vpnserver/server.crt
+      - ./server.key:/usr/vpnserver/server.key
+      - ./ca.crt:/usr/vpnserver/ca.crt
+      - ./vpn_server.config:/opt/vpn_server.config
+      - ./cert.sh:/cert.sh
     env_file:
       - ../.env
-      - ./.env
+      - ./.env.softether
+
+  samba:
+    image: dperson/samba
+    networks:
+      default:
+        ipv4_address: 192.168.31.3
+    ports:
+      - 139
+      - 445
+    volumes:
+      - /home:/mount
+    env_file:
+      - ../.env
+      - ./.env.samba
+
+  dnsmasq:
+    image: andyshinn/dnsmasq
+    cap_add:
+      - NET_ADMIN
+    networks:
+      default:
+        ipv4_address: 192.168.31.4
+    ports:
+      - 53
+      - 53/udp
+    volumes:
+      - ./hosts:/etc/hosts
+
 networks:
   default:
-    external:
-      name: samba_default
+    ipam:
+      config:
+      - 
+        subnet: 192.168.31.0/24
