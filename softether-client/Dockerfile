@@ -18,7 +18,7 @@ RUN apt update -y \
 # vpncmd
 #   NicCreate name
 #   AccountCreate name
-#   AccountPasswordSet name
+#   AccountCertSet name or AccountPasswordSet name
 #   AccountConnect name
 # dhclient -v vpn_name
 # mount -t cifs -o username=user,password=pass,vers=3.0 //smb.vpn/home /mnt
