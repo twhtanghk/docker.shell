@@ -6,5 +6,6 @@
 #   - x11 -v $PWD/src:/root twhtanghk/docker.printrun
 #   - x11 -v $PWD/src:/root --entrypoint /usr/local/blender/blender ikester/blender
 #   - x11 -v $PWD/zygrib:/root twhtanghk/zygrib
-#   - x11 --device=/dev/snd:/dev/snd twhtanghk/opencpn
+#   - x11 --device /dev/snd twhtanghk/opencpn
+#   - x11 -it --device /dev/ttyACM0 -v $PWD/src:/root twhtanghk/arduino
 docker run -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix $@
