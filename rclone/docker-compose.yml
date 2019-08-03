@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  rclone:
+    image: twhtanghk/rclone
+    privileged: true
+    volumes:
+      - /etc/ssl:/etc/ssl
+      - ../src:/root
+    env_file:
+      - ../.env
+    command: "rclone mount --vfs-cache-mode writes gdrive: gdrive"
