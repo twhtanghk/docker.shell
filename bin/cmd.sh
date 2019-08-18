@@ -5,4 +5,4 @@ proj=$1
 shift
 
 export COMPOSE_OPTIONS="-e COMPOSEROOT=${PWD} -e INTRANETIP=${INTRANETIP}"
-bin/docker-compose -f ${proj}/docker-compose.yml ${cmd} $@
+docker-compose -f ${proj}/docker-compose.yml ${cmd} $@
