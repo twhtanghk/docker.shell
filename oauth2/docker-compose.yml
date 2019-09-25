@@ -1,22 +1,26 @@
 version: '2'
 services:
-  mysql:
-    image: mariadb
-    container_name: mysql
-    hostname: mysql
-    environment:
-      - MYSQL_DATABASE=org
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+  mongo:
+    image: mongo
     ports:
-      - 3306
+      - 27017
     volumes:
-      - ${COMPOSEROOT}/oauth2/data:/var/lib/mysql
+      - ./data:/data/db
+    command: mongod --directoryperdb
+    env_file:
+      - ../.env
 
-  oauth2:
+  jsoauth2:
     depends_on:
-      - mysql
-    image: twhtanghk/oauth2
-    container_name: oauth2
-    hostname: oauth2
+      - mongo
+    image: twhtanghk/jsoauth2
     ports:
-      - 8000
+      - 3000
+    env_file:
+      - ./.env
+      - ../.env
+
+networks:
+  default:
+    external:
+      name: net_default 
