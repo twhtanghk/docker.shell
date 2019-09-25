@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  hkexkoa:
+    image: twhtanghk/hkexkoa
+    ports:
+      - 3000
+    env_file:
+      - ../.env
+      - ./.env
+
+networks:
+  default:
+    external:
+      name: net_default
