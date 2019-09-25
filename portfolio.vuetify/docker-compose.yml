@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  portfoliovue:
+    image: twhtanghk/portfolio:vuetify
+    ports:
+      - 1337
+    env_file:
+      - ../.env
+      - ./.env
+
+networks:
+  default:
+    external:
+      name: net_default
