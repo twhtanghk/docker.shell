@@ -1,23 +1,23 @@
 version: '2'
 services:
-  mongo:
-    image: mongo
-    ports:
-      - 27017
-    volumes:
-      - ./data:/data/db
-    command: mongod --directoryperdb
-
   echo:
     image: solsson/http-echo
     ports: 
       - 80
 
-  sails_proxy:
+  proxy:
     image: twhtanghk/sails_proxy
     ports:
-      - 1337
+      - 167.71.212.195:443:1337
     volumes:
+      - ./data:/usr/src/app/data
+      - ./ssl:/usr/src/app/config/env/ssl
       - ./production.coffee:/usr/src/app/config/env/production.coffee
     env_file: 
       - ../.env
+      - ./.env
+
+networks:
+  default:
+    external:
+      name: net_default
