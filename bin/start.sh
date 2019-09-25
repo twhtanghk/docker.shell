@@ -2,6 +2,6 @@
 
 xhost +
 
-for i in oauth2 proxy aastocks hkexkoa portfolio.vuetify; do
+for i in smtp oauth2 proxy aastocks hkexkoa portfolio.vuetify; do
   bin/up $i -d
 done
