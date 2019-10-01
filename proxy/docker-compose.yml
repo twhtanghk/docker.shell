@@ -8,7 +8,7 @@ services:
   proxy:
     image: twhtanghk/sails_proxy
     ports:
-      - 167.71.212.195:443:1337
+      - 1337
     volumes:
       - ./data:/usr/src/app/data
       - ./ssl:/usr/src/app/config/env/ssl
