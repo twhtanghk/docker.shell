@@ -1,0 +1,16 @@
+version: '2'
+services:
+  haproxy:
+    image: haproxy
+    ports:
+      - 167.71.212.195:443:443
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./tmp:/var/lib/haproxy
+    env_file: 
+      - ../.env
+
+networks:
+  default:
+    external:
+      name: net_default
