@@ -1,0 +1,8 @@
+version: '3'
+services:
+  opencpn:
+    image: twhtanghk/opencpn
+    environment:
+      - DISPLAY
+    env_file:
+      - ../.env
