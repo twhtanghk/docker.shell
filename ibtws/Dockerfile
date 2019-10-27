@@ -15,4 +15,4 @@ RUN cd /tmp \
 &&  chmod u+x $FILE \
 &&  echo n |./$FILE
 
-CMD /home/user/Jts/tws
+CMD /home/user/Jts/tws; tail -f /dev/null
