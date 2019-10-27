@@ -3,6 +3,8 @@ services:
   opencpn:
     image: twhtanghk/opencpn
     user: user
+    devices:
+      - /dev/snd
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /var/run/dbus:/var/run/dbus
