@@ -1,0 +1,6 @@
+version: '2'
+services:
+  ibcp:
+    image: twhtanghk/ibcp
+    env_file:
+      - ../.env
