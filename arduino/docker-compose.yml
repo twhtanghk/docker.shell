@@ -1,0 +1,15 @@
+version: '2'
+services:
+  arduino:
+    image: twhtanghk/arudino:1.8.10
+    devices:
+      - /dev/ttyACM0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /var/run/dbus:/var/run/dbus
+      - /usr/share/fonts:/usr/share/fonts
+      - ./src:/root`
+    environment:
+      - DISPLAY
+    env_file:
+      - ../.env
