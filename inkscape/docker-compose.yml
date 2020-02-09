@@ -1,7 +1,7 @@
 version: '2'
 services:
   inkscape:
-    image: jess/inkscape
+    image: twhtanghk/inkscape
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /var/run/dbus:/var/run/dbus
