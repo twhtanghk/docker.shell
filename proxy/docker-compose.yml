@@ -12,7 +12,6 @@ services:
     volumes:
       - ./data:/usr/src/app/data
       - ./ssl:/usr/src/app/config/env/ssl
-      - ./production.coffee:/usr/src/app/config/env/production.coffee
     env_file: 
       - ../.env
       - ./.env

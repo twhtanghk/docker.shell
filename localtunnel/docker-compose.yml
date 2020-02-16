@@ -1,0 +1,10 @@
+version: '2'
+services:
+  localtunnel:
+    image: twhtanghk/ltss
+    network_mode: host
+    volumes:
+      - ./ssl:/root/ssl
+    command: /usr/local/bin/ltss -a 0.0.0.0 -p 4430 -d ttsoon.ml --cert /root/ssl/ttsoon.ml.full.crt --key /root/ssl/ttsoon.ml.key
+    env_file:
+      - ../.env
