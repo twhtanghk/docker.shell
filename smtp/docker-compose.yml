@@ -12,3 +12,4 @@ services:
     env_file: 
       - ../.env
       - ./.env
+    restart: unless-stopped
