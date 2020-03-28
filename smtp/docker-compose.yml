@@ -3,7 +3,10 @@ services:
   smtp:
     image: namshi/smtp
     ports:
-      - 25
+      - $ip:25:25
+    volumes:
+      - ./data/mail:/var/mail
+      - ./data/aliases:/etc/aliases
     dns:
       - 8.8.8.8
     env_file: 

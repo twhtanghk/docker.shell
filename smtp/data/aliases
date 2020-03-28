@@ -1,0 +1,14 @@
+# /etc/aliases
+mailer-daemon: postmaster@domain
+postmaster: root@domain
+nobody: root@domain
+hostmaster: root@domain
+usenet: root@domain
+news: root@domain
+webmaster: root@domain
+www: root@domain
+ftp: root@domain
+abuse: root@domain
+noc: root@domain
+security: root@domain
+user: root@domain
