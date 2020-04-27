@@ -3,9 +3,9 @@ services:
   candle:
     image: twhtanghk/candle
     devices:
-      - /dev/ttyACM0
       - /dev/dri
     volumes:
+      - /dev/ttyS0:/dev/ttyS0
       - ../src:/root
       - ./settings.ini:/usr/local/bin/settings.ini
       - /tmp/.X11-unix:/tmp/.X11-unix
@@ -15,3 +15,4 @@ services:
       - DISPLAY
     env_file:
       - ../.env
+# socat pty,raw,link=/dev/ttyS0 tcp:192.168.0.102:23
