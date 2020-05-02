@@ -1,7 +1,7 @@
 version: '2'
 services:
   kicad:
-    image: jess/kicad
+    image: twhtanghk/kicad
     devices:
       - /dev/dri
     volumes:
