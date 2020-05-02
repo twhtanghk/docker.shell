@@ -1,0 +1,13 @@
+version: '2'
+services:
+  bcnc:
+    image: twhtanghk/bcnc
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /var/run/dbus:/var/run/dbus
+      - /usr/share/fonts:/usr/share/fonts
+      - ../src:/root
+    environment:
+      - DISPLAY
+    env_file:
+      - ../.env
