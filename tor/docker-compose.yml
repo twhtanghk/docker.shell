@@ -1,0 +1,20 @@
+version: '2'
+services:
+  tor:
+    image: twhtanghk/tor-browser
+    devices:
+      - /dev/snd
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /var/run/dbus:/var/run/dbus
+      - /usr/share/fonts:/usr/share/fonts
+      - $HOME/.config/pulse/cookie:/run/pulse/cookie
+    environment:
+      - DISPLAY
+      - PULSE_SERVER=tcp:172.17.0.1:4713
+      - PULSE_COOKIE=/run/pulse/cookie
+      - LANG
+    env_file:
+      - ../.env
+    group_add:
+      - audio
