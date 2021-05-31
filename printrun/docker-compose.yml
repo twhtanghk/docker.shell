@@ -2,6 +2,7 @@ version: '2'
 services:
   printrun:
     image: twhtanghk/docker.printrun
+    ipc: true
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /var/run/dbus:/var/run/dbus
