@@ -6,4 +6,13 @@ services:
     ports:
       - 3389
     volumes:
-      - ${COMPOSEROOT}/xrdp:/home/user
+      - ./xrdp:/home/user
+    env_file:
+      - ../.env
+    networks:
+      - stock
+
+networks:
+  stock:
+    external: true
+    enable_ipv6: false
