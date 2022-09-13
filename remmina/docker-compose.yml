@@ -1,0 +1,20 @@
+version: '3'
+services:
+  remmina:
+    image: lscr.io/linuxserver/remmina:latest
+    ports:
+      - 80:3000
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./config:/config
+    env_file:
+      - ../.env
+    networks:
+      - stock
+
+networks:
+  stock:
+    external: true
+    enable_ipv6: false
