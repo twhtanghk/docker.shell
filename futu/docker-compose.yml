@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   futu:
     image: twhtanghk/futu
@@ -18,3 +18,9 @@ services:
       - ../.env
     group_add:
       - audio
+
+  python:
+    image: python
+    env_file:
+      - ../.env
+    command: top -b -d 1000
