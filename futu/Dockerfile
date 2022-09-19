@@ -8,6 +8,6 @@ RUN  apt-get update \
 &&  rm -rf /var/lib/apt/lists/* \
 &&  (cd /tmp && wget -q $SRC && tar -C /opt -xf $(basename $SRC))
 
-CMD /opt/FutuOpenD_6.3.2808_NN_Ubuntu16.04/FutuOpenD-GUI_6.3.2808_NN_Ubuntu16.04/FutuOpenD_6.3.2808_Ubuntu16.04.AppImage
+CMD /opt/FutuOpenD_6.3.2808_NN_Ubuntu16.04/FutuOpenD_6.3.2808_NN_Ubuntu16.04/FutuOpenD
 
 WORKDIR /root
