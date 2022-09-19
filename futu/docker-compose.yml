@@ -6,9 +6,3 @@ services:
       - ./FutuOpenD.xml:/opt/FutuOpenD_6.3.2808_NN_Ubuntu16.04/FutuOpenD_6.3.2808_NN_Ubuntu16.04/FutuOpenD.xml
     env_file:
       - ../.env
-
-  python:
-    image: python
-    env_file:
-      - ../.env
-    command: sh -c "apt update; apt install -y telnet inetutils-ping; tail -f /dev/null"
