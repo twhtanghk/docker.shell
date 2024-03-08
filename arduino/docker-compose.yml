@@ -1,7 +1,7 @@
 version: '2'
 services:
   arduino:
-    image: twhtanghk/arduino
+    image: twhtanghk/arduino:latest
     devices:
       - /dev/ttyACM0
     volumes:
