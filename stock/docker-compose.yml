@@ -1,0 +1,81 @@
+version: '3'
+services:
+  emqx:
+    image: emqx/emqx
+    ports:
+      - "8083:8083"
+      - "18083:18083"
+    networks:
+      - stock
+    
+  # backup: 
+  #   - podman exec stock_mongo_1 mongodump --gzip --out /root/backup
+  #   - rsync -rzvh stock /media/myroot/365ccafb-5cc0-44e4-b28c-3626174d94bf1/
+  mongo:
+    image: mongo
+    ports:
+      - "27017"
+    volumes:
+      - ./data:/data/db
+      - ./backup:/root/backup
+    command: --directoryperdb
+    env_file:
+      - ../.env
+    networks:
+      - stock
+
+  proxy:
+    image: twhtanghk/sails_proxy
+    ports:
+      - "8080:1337"
+    volumes:
+      - ./proxy:/usr/src/app/data
+    env_file: 
+      - ../.env
+    networks:
+      - stock
+
+  portfolio:
+    image: twhtanghk/portfolio
+    ports:
+      - "3000"
+    env_file:
+      - ../.env
+      - ./.env.portfolio
+    networks:
+      - stock
+
+  hkexkoa:
+    image: twhtanghk/hkexkoa
+    ports:
+      - "3000"
+    env_file:
+      - ../.env
+      - ./.env.hkexkoa
+    networks:
+      - stock
+
+  futu:
+    image: twhtanghk/futu
+    volumes:
+      - ./FutuOpenD.xml:/opt/FutuOpenD_7.0.3218_NN_Ubuntu16.04/FutuOpenD_7.0.3218_NN_Ubuntu16.04/FutuOpenD.xml
+    env_file:
+      - ../.env
+      - ./.env.futu
+    networks:
+      - stock
+
+  chart:
+    image: twhtanghk/chart
+    ports:
+      - "3000"
+    env_file:
+      - ../.env
+      - ./.env.chart
+    networks:
+      - stock
+
+networks:
+  stock:
+    external: true
+    enable_ipv6: false

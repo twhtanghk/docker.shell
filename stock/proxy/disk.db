@@ -1,0 +1,118 @@
+{
+  "data": {
+    "upstream": [
+      {
+        "createdBy": "twhtanghk@gmail.com",
+        "name": "MQTT Dashboard",
+        "prefix": "/emqx/",
+        "target": "http://emqx:18083/",
+        "order": 1,
+        "createdAt": "2019-03-13T14:09:35.750Z",
+        "updatedAt": "2019-03-14T02:38:53.231Z",
+        "id": 1
+      },
+      {
+        "createdBy": "twhtanghk@gmail.com",
+        "name": "portfolio",
+        "prefix": "/portfolio/",
+        "target": "http://portfolio:3000/",
+        "order": 3,
+        "createdAt": "2019-03-19T05:20:47.237Z",
+        "updatedAt": "2019-10-23T04:08:01.934Z",
+        "id": 4
+      },
+      {
+        "createdBy": "twhtanghk@gmail.com",
+        "name": "hkexkoa",
+        "prefix": "/hkexkoa/",
+        "target": "http://hkexkoa:3000/",
+        "order": 4,
+        "createdAt": "2019-04-09T01:46:37.864Z",
+        "updatedAt": "2019-04-09T01:49:00.350Z",
+        "id": 5
+      },
+      {
+        "createdBy": "twhtanghk@gmail.com",
+        "name": "chart",
+        "prefix": "/chart/",
+        "target": "http://chart:3000/",
+        "order": 4,
+        "createdAt": "2019-04-09T01:46:37.864Z",
+        "updatedAt": "2019-04-09T01:49:00.350Z",
+        "id": 6
+      }
+    ],
+    "user": [
+      {
+        "email": "twhtanghk@gmail.com",
+        "createdAt": "2019-03-13T14:09:35.706Z",
+        "updatedAt": "2019-03-13T14:09:35.706Z"
+      }
+    ]
+  },
+  "schema": {
+    "upstream": {
+      "name": {
+        "type": "string",
+        "defaultsTo": "echo"
+      },
+      "prefix": {
+        "type": "string",
+        "defaultsTo": "/prefix"
+      },
+      "target": {
+        "type": "string",
+        "defaultsTo": "http://echo"
+      },
+      "photo": {
+        "type": "string"
+      },
+      "order": {
+        "type": "integer"
+      },
+      "createdBy": {
+        "type": "string",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "createdBy"
+      },
+      "updatedBy": {
+        "type": "string",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "updatedBy"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "user": {
+      "email": {
+        "type": "string",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "upstream": {
+      "id": 7
+    },
+    "user": {}
+  }
+}
