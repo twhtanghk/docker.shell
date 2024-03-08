@@ -1,7 +1,7 @@
 version: '3'
 services:
   freecad:
-    image: twhtanghk/freecad
+    image: twhtanghk/freecad:0.20.2
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /var/run/dbus:/var/run/dbus
@@ -9,3 +9,5 @@ services:
       - ../src:/root
     environment:
       - DISPLAY
+      - QTWEBENGINE_DISABLE_SANDBOX=1
+    command: top -b -d 1000
