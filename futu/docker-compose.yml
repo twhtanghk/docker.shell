@@ -1,8 +1,12 @@
 version: '3'
+
 services:
+  # telnet localhost 22222
+  # input_phone_verify_code -code=123456
   futu:
     image: twhtanghk/futu
     volumes:
-      - ./FutuOpenD.xml:/opt/FutuOpenD_6.3.2808_NN_Ubuntu16.04/FutuOpenD_6.3.2808_NN_Ubuntu16.04/FutuOpenD.xml
+      - ./FutuOpenD.xml:/opt/Futu_OpenD_8.1.4108_Ubuntu16.04/Futu_OpenD_8.1.4108_Ubuntu16.04/FutuOpenD.xml
     env_file:
       - ../.env
+      - ./.env
