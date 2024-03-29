@@ -3,9 +3,7 @@ services:
   mcu:
     image: twhtanghk/docker.esp8266
     devices:
-      - /dev/ttyUSB0
-    ports:
-      - 8000:8080
+      - /dev/ttyS2
     volumes:
       - ./mcu:/root/src
     command: top -b -d 1000
