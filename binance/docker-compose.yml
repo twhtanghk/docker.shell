@@ -1,0 +1,8 @@
+services:
+  binance:
+    image: twhtanghk/binance
+    volumes:
+      - ./binance-private-key.pem:/usr/src/app/binance-private-key.pem
+    env_file:
+      - ../.env
+      - ./.env
