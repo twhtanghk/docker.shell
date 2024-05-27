@@ -3,6 +3,10 @@ services:
     image: twhtanghk/binance
     volumes:
       - ./binance-private-key.pem:/usr/src/app/binance-private-key.pem
+    environment:
+      - LEVEL=debug
+      - BINANCE_API_KEY
+      - BINANCE_RSA_KEY
     env_file:
       - ../.env
-      - ./.env
+    command: tail -f /dev/null
