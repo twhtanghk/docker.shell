@@ -1,12 +1,10 @@
 services:
   binance:
-    image: twhtanghk/binance
-    volumes:
-      - ./binance-private-key.pem:/usr/src/app/binance-private-key.pem
+    image: twhtanghk/binance:reconnect
     environment:
       - LEVEL=debug
       - BINANCE_API_KEY
       - BINANCE_RSA_KEY
     env_file:
       - ../.env
-    command: tail -f /dev/null
+    command: "npm run mean -- --order '{\"nShare\": 10}'"
