@@ -1,13 +1,13 @@
-FROM node
+FROM ubuntu
 
-ENV SRC=Futu_OpenD_7.5.3708_Ubuntu16.04.tar.gz
-ADD $SRC /opt
-WORKDIR /usr/src/app
+ENV TMP=/tmp \
+    SRC=Futu_OpenD_8.8.4818_Ubuntu16.04.tar.gz
+COPY $SRC $TMP
 
-RUN  apt-get update \
-&&  apt-get install -y curl telnet git-core vim net-tools \
-&&  apt-get clean \
-&&  rm -rf /var/lib/apt/lists/* \
-&&  git clone https://github.com/twhtanghk/futu .
+RUN (tar -C /opt -xf $TMP/$SRC) \
+&&  apt-get update \
+&&  apt-get install -y telnet \
+&&  apt-get clean
+# &&  rm -rf /var/lib/apt/lists/* $TMP/$SRC
 
-CMD /opt/Futu_OpenD_7.5.3708_Ubuntu16.04/Futu_OpenD_7.5.3708_Ubuntu16.04/FutuOpenD
+CMD ["/opt/Futu_OpenD_8.8.4818_Ubuntu16.04/Futu_OpenD_8.8.4818_Ubuntu16.04/FutuOpenD"]
